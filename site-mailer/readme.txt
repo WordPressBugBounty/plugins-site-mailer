@@ -4,7 +4,7 @@ Tags: email, email log, SMTP, email API, sender
 Requires at least: 6.3
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -114,6 +114,18 @@ Yes, the Elementor team offers full support for Site Mailer questions. You can c
 5. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.
 
 == Changelog ==
+= 1.0.1- 2024-08-10 =
+* New: Connect helper for users that are not connected
+* New: Added 100% quota reached notice for admin pages
+* Tweak: Improved "Verify Domain" buttons UI
+* Tweak: Increase domain character length for more custom domain
+* Tweak: Show 80% quota reached notice on settings panel
+* Tweak: Improved RTL support
+* Fix: Site local time does not match with the email sent time
+* Fix: Settings panel Not loading in edge cases
+* Fix: Refresh token error and reconnect
+* Fix: Support multiple recipients emails
+
 
 = 1.0.0- 2024-25-09 =
 * New: Added option to see full email on hover in logs.
@@ -125,7 +137,7 @@ Yes, the Elementor team offers full support for Site Mailer questions. You can c
 * Tweak: Strings changes and corrections
 * Tweak: Add link to reached 100% banner.
 * Tweak: Auto close Custom Domain verification modal on successful verification.
-* Tweak: Added “copied" indication when coping DNS recored.
+* Tweak: Added “copied" indication when coping DNS records.
 * Tweak: Change the "Pending" status to be called "Sending"
 * Tweak: Add warning notices when conflicting 3rd party SMTP/Email plugins are active.
 * Fix: invalid plugin header in some hosting environments

@@ -18,6 +18,8 @@ class Module extends Module_Base {
 		return [
 			'Pointers',
 			'Conflicts',
+			'Not_Connected',
+			'Quota_Exhausted_Banner',
 		];
 	}
 

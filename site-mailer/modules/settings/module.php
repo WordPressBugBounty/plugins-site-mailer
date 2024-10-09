@@ -418,6 +418,7 @@ class Module extends Module_Base {
 			'verificationRecords'    => Settings::get( Settings::CUSTOM_DOMAIN_VERIFICATION_RECORDS ),
 			'verificationStartTime'  => get_option( self::SETTING_PREFIX . 'custom_domain_verification_start_time' ),
 			'isValidPlanData'		 => get_option( self::SETTING_PREFIX . 'is_valid_plan_data' ),
+			'isRTL' => is_rtl(),
 		];
 	}
 

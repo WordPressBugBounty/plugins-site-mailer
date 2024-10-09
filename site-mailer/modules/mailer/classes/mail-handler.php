@@ -70,8 +70,8 @@ class Mail_Handler {
 	 * @throws Missing_Table_Exception
 	 */
 	public static function send_test_mail( string $address ): void {
-		$current_timestamp = gmdate( 'Y-m-d H:i:s' );
-		$url = get_bloginfo('url');
+		$current_timestamp = current_time( 'mysql' );
+		$url = get_bloginfo( 'url' );
 		/* translators: %s is the timestamp */
 		$msg = '<!doctype html>
 				<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
@@ -139,19 +139,22 @@ class Mail_Handler {
 	 */
 	private function write_log( string $status = null ) {
 		$keep_log = Settings::get_keep_log_setting();
+		$datetime_wp = current_time( 'mysql' );
 
 		$required = [
-			'api_id'  => $this->log_id,
-			'subject' => $this->email['subject'],
-			'to'      => wp_json_encode( $this->email['to'] ), // possible array of strings
-			'source'  => $this->source,
-			'status'  => $status ?? self::LOG_STATUSES['pending'],
+			Logs_Table::API_ID  => $this->log_id,
+			Logs_Table::SUBJECT => $this->email['subject'],
+			Logs_Table::TO      => wp_json_encode( $this->email['to'] ), // possible array of strings
+			Logs_Table::SOURCE  => $this->source,
+			Logs_Table::STATUS  => $status ?? self::LOG_STATUSES['pending'],
+			Logs_Table::CREATED_AT => $datetime_wp,
+			Logs_Table::UPDATED_AT => $datetime_wp,
 		];
 		$on_keep  = $keep_log ? [
-			'headers' => wp_json_encode( $this->email['headers'] ), // possible array of strings
-			'message' => $this->email['message'],
+			Logs_Table::HEADERS => wp_json_encode( $this->email['headers'] ), // possible array of strings
+			Logs_Table::MESSAGE => $this->email['message'],
 		] : [];
-		$log      = new Log_Entry( [ 'data' => array_merge( $required, $on_keep ) ] );
+		$log = new Log_Entry( [ 'data' => array_merge( $required, $on_keep ) ] );
 		$log->create();
 	}
 

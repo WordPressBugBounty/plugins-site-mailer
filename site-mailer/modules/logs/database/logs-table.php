@@ -2,6 +2,7 @@
 
 namespace SiteMailer\Modules\Logs\Database;
 
+use mysql_xdevapi\Exception;
 use SiteMailer\Classes\Database\{
 	Table,
 	Database_Constants
@@ -13,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Logs_Table extends Table {
 	// override base's const:
-	const DB_VERSION = '3';
+	const DB_VERSION = '4';
 	const DB_VERSION_FLAG_NAME = 'site_mail_logs_db_version';
 	const LOG_STATUSES = [
 		'pending',
@@ -42,6 +43,39 @@ class Logs_Table extends Table {
 
 	public static $table_name = 'site_mail_logs';
 
+	/**
+	 * install
+	 *
+	 * This function compares the version of the installed table and the current version as reported by
+	 * the class.
+	 * If the versions are different, the table will be installed or updated, and the option
+	 * will be set to the current version.
+	 */
+	public static function install(): void {
+		$installed_ver = get_option( static::DB_VERSION_FLAG_NAME, -1 );
+
+		if ( static::DB_VERSION !== $installed_ver ) {
+
+			self::run_migration( $installed_ver );
+
+			$sql = static::get_create_table_sql();
+
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+			dbDelta( $sql );
+
+			update_option( static::DB_VERSION_FLAG_NAME, static::DB_VERSION, false );
+		}
+
+		static::set_table_prefix();
+	}
+
+	public static function run_migration( $version ) {
+		// Drop index from self::TO
+		if ( $version > 0 && $version < 4 ) {
+			self::query( 'ALTER TABLE `' . self::table_name() . '` DROP INDEX `' . self::TO . '`' );
+		}
+	}
+
 	public static function get_columns(): array {
 		return [
 			self::ID         => [
@@ -63,12 +97,11 @@ class Logs_Table extends Table {
 				'key' => Database_Constants::build_key_string( Database_Constants::KEY, self::API_ID ),
 			],
 			self::TO         => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::VARCHAR, 255 ),
+				'type'  => Database_Constants::get_col_type( Database_Constants::TEXT ),
 				'flags' => Database_Constants::build_flags_string( [
 					Database_Constants::DEFAULT,
 					'\'\'',
 				] ),
-				'key'   => Database_Constants::build_key_string( Database_Constants::KEY, self::TO ),
 			],
 			self::SUBJECT    => [
 				'type'  => Database_Constants::get_col_type( Database_Constants::VARCHAR, 768 ),

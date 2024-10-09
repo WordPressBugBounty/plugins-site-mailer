@@ -121,6 +121,22 @@ class Service {
 	}
 
 	/**
+	 * disconnect
+	 *
+	 * @return void
+	 * @throws Service_Exception
+	 */
+	public static function reconnect(): void {
+		$sessions_url = Utils::get_sessions_url();
+
+		if ( ! $sessions_url ) {
+			throw new Service_Exception( 'Missing sessions URL' );
+		}
+
+		Data::clear_session();
+	}
+
+	/**
 	 * Get token & optionally save to user
 	 *
 	 * @param string $grant_type

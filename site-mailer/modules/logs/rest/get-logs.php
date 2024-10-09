@@ -70,7 +70,7 @@ class Get_Logs extends Route_Base {
 			] : '1';
 
 			$logs = Log_Entry::get_logs(
-				'`id`, `subject`, `message`, `to`, `source`, `status`, `opened`, `created_at`',
+				'`id`, `api_id`, `subject`, `message`, `to`, `headers`, `source`, `status`, `opened`, `created_at`',
 				$where,
 				$limit,
 				$offset,

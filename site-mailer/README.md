@@ -1,17 +1,19 @@
-# Site Mailer – SMTP Replacement, Email API Deliverability & Email Log
+# Site Mailer - SMTP Replacement, Email API Deliverability & Email Log
 
 **Contributors:** elemntor \
 **Tags:** email, email log, SMTP, email API, sender \
 **Requires at least:** 6.3 \
 **Tested up to:** 6.6 \
 **Requires PHP:** 7.4 \
-**Stable tag:** 1.0.0 \
+**Stable tag:** 1.0.1 \
 **License:** GPL-3 \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.en.html
 
 Effortlessly manage transactional emails with Site Mailer. High deliverability, logs and statistics, and no SMTP plugins needed.
 
 ## Description
+
+https://www.youtube.com/watch?v=1hOxkEO-22I
 
 Has your WordPress site stopped sending emails? Are emails from your WordPress site landing in spam or not getting delivered? Are customers complaining about missing messages?
 
@@ -119,26 +121,59 @@ Yes, the Elementor team offers full support for Site Mailer questions. You can c
 
 ### 1. Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.
 
-![Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.](https://ps.w.org/site-mailer-–-smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-1.png)
+![Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-1.png)
 
 ### 2. Email setup complete in one click – Your site is now ready to send emails using a default sender.
 
-![Email setup complete in one click – Your site is now ready to send emails using a default sender.](https://ps.w.org/site-mailer-–-smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-2.png)
+![Email setup complete in one click – Your site is now ready to send emails using a default sender.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-2.png)
 
 ### 3. Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.
 
-![Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.](https://ps.w.org/site-mailer-–-smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-3.png)
+![Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-3.png)
 
 ### 4. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.
 
-![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.](https://ps.w.org/site-mailer-–-smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-4.png)
+![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-4.png)
 
 ### 5. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.
 
-![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.](https://ps.w.org/site-mailer-–-smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-5.png)
+![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-5.png)
 
 
 ## Changelog
+
+### 1.0.1- 2024-08-10
+
+* New: Connect helper for users that are not connected
+* New: Added 100% quota reached notice for admin pages
+* Tweak: Improved "Verify Domain" buttons UI
+* Tweak: Increase domain character length for more custom domain
+* Tweak: Show 80% quota reached notice on settings panel
+* Tweak: Improved RTL support
+* Fix: Site local time does not match with the email sent time
+* Fix: Settings panel Not loading in edge cases
+* Fix: Refresh token error and reconnect
+* Fix: Support multiple recipients emails
+
+
+### 1.0.0- 2024-25-09
+
+* New: Added option to see full email on hover in logs.
+* New: Added a popup to show warning when plan data is not available.
+* Tweak: Statistics Pie chart labeling.
+* Tweak: After connect modal UI spacing.
+* Tweak: Plans bar status is now dynamic and show how many emails  are left.
+* Tweak: App header logo adjustments.
+* Tweak: Strings changes and corrections
+* Tweak: Add link to reached 100% banner.
+* Tweak: Auto close Custom Domain verification modal on successful verification.
+* Tweak: Added “copied" indication when coping DNS records.
+* Tweak: Change the "Pending" status to be called "Sending"
+* Tweak: Add warning notices when conflicting 3rd party SMTP/Email plugins are active.
+* Fix: invalid plugin header in some hosting environments
+* Fix: UI jumps when pressing navigating between tabs.
+* Fix: Custom domain prefix overriding default sender in edge cases.
+
 
 ### 0.0.1- 2024-16-09
 

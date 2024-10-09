@@ -65,6 +65,8 @@ class Authorize extends Route_Base {
 
 			$authorize_url = Utils::get_authorize_url( $client_id );
 
+			$authorize_url = apply_filters( 'site_mailer_connect_authorize_url', $authorize_url );
+
 			return $this->respond_success_json( $authorize_url );
 		} catch ( Throwable $t ) {
 			return $this->respond_error_json( [

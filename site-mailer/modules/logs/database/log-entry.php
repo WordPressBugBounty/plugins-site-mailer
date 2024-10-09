@@ -90,7 +90,13 @@ class Log_Entry extends Entry {
 	 * @return void
 	 */
 	public static function patch_log( string $id, string $status ): void {
-		Logs_Table::update( [ Logs_Table::STATUS => $status ], [ Logs_Table::API_ID => $id ] );
+		Logs_Table::update(
+			[
+				Logs_Table::STATUS => $status,
+				Logs_Table::UPDATED_AT => current_time( 'mysql' ),
+			],
+			[ Logs_Table::API_ID => $id ]
+		);
 	}
 
 	/**
