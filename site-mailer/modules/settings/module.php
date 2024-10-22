@@ -9,6 +9,7 @@ use SiteMailer\Modules\Connect\Classes\Data;
 use SiteMailer\Classes\Utils;
 use SiteMailer\Modules\Connect\Classes\Utils as Connect_Utils;
 use SiteMailer\Modules\Settings\Classes\Settings;
+use SiteMailer\Modules\Logs\Components\Log_Pull;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -158,10 +159,10 @@ class Module extends Module_Base {
 		}
 		if ( ! is_wp_error( $response ) ) {
 			update_option( self::SETTING_PREFIX . 'plan_data', $response );
-			update_option( self::SETTING_PREFIX . 'is_valid_plan_data', true );
+			update_option( Settings::IS_VALID_PLAN_DATA, true );
 		} else {
 			error_log( esc_html( $response->get_error_message() ) );
-			update_option( self::SETTING_PREFIX . 'is_valid_plan_data', false );
+			update_option( Settings::IS_VALID_PLAN_DATA, false );
 		}
 	}
 
@@ -176,106 +177,69 @@ class Module extends Module_Base {
 		$settings = [
 			'keep_log'                       => [
 				'type'         => 'boolean',
-				'show_in_rest' => [
-					'schema' => [
-						'type' => 'boolean',
-					],
-				],
 				'description'  => __( 'Site Mailer Keep Log', 'site-mailer' ),
 			],
 			'close_post_connect_modal'       => [
 				'type'         => 'boolean',
-				'show_in_rest' => [
-					'schema' => [
-						'type' => 'boolean',
-					],
-				],
 				'description'  => __( 'Site Mailer Close Post Connect Modal', 'site-mailer' ),
 			],
 			'from_name'                      => [
 				'type'         => 'string',
-				'show_in_rest' => [
-					'schema' => [
-						'type' => 'string',
-					],
-				],
 				'description'  => __( 'Site Mailer From Email', 'site-mailer' ),
 			],
 			'reply_to_email'                 => [
 				'type'         => 'string',
-				'show_in_rest' => [
-					'schema' => [
-						'type' => 'string',
-					],
-				],
 				'description'  => __( 'Site Mailer Reply Email', 'site-mailer' ),
 			],
 			'sender_domain'                  => [
 				'type'         => 'string',
-				'show_in_rest' => [
-					'schema' => [
-						'type' => 'string',
-					],
-				],
 				'description'  => __( 'Site Mailer Sender Domain', 'site-mailer' ),
 			],
 			'sender_email_prefix'            => [
 				'type'         => 'string',
-				'show_in_rest' => [
-					'schema' => [
-						'type' => 'string',
-					],
-				],
 				'description'  => __( 'Site Mailer Sender Mail Prefix', 'site-mailer' ),
 			],
 			'custom_domain_dns_records'      => [
 				'type'         => 'string',
-				'show_in_rest' => [
-					'schema' => [
-						'type' => 'string',
-					],
-				],
 				'description'  => __( 'Site Mailer custom domain DNS records', 'site-mailer' ),
 			],
 			'verification_started'           => [
 				'type'         => 'boolean',
-				'show_in_rest' => true,
 			],
 			'registration_started'           => [
 				'type'         => 'boolean',
-				'show_in_rest' => true,
 			],
 			'confirm_domain_settings_opened' => [
 				'type'         => 'boolean',
-				'show_in_rest' => true,
 			],
 			'confirm_dns_settings_added'     => [
 				'type'         => 'boolean',
-				'show_in_rest' => true,
 			],
 			'active_step'                    => [
 				'type'         => 'boolean',
-				'show_in_rest' => true,
 			],
 			'custom_domain_verified'         => [
 				'type'         => 'boolean',
-				'show_in_rest' => true,
 			],
 			'custom_domain_verified_alert'   => [
 				'type'         => 'boolean',
-				'show_in_rest' => true,
 			],
 			'custom_domain_verification_start_time' => [
 				'type'         => 'string',
-				'show_in_rest' => true,
 			],
 			'is_valid_plan_data' => [
+				'type' => 'boolean',
+			],
+			'hide_logs_status_refresh_infotip' => [
 				'type' => 'boolean',
 				'show_in_rest' => true,
 			],
 		];
 
 		foreach ( $settings as $setting => $args ) {
+			if ( ! isset( $args['show_in_rest'] ) ) {
+				$args['show_in_rest'] = true;
+			}
 			register_setting( 'options', self::SETTING_PREFIX . $setting, $args );
 		}
 	}
@@ -286,8 +250,8 @@ class Module extends Module_Base {
 	 * @return string
 	 */
 	public static function get_sender_email(): string {
-		$settings    = get_option( 'site_mailer_plan_data' );
-		$sender_in_used    = get_option( 'site_mailer_sender_email_prefix' );
+		$settings    = Settings::get( Settings::PLAN_DATA );
+		$sender_in_used    = Settings::get( Settings::SENDER_EMAIL_PREFIX );
 		$sender_mail = '';
 		$domain_verified = 'verified' === Settings::get( Settings::CUSTOM_DOMAIN_VERIFICATION_STATUS );
 
@@ -311,7 +275,7 @@ class Module extends Module_Base {
 	 * @return string
 	 */
 	public static function get_sender_from_name(): string {
-		return get_option( self::SETTING_PREFIX . 'from_name', 'Site Mailer' );
+		return Settings::get( Settings::FROM_NAME );
 	}
 
 	/**
@@ -320,20 +284,12 @@ class Module extends Module_Base {
 	 * @return string
 	 */
 	public static function get_sender_reply_email(): string {
-		$email = get_option( self::SETTING_PREFIX . 'reply_to_email' );
+		$email = Settings::get( Settings::REPLY_TO_EMAIL );
+
 		if ( ( ! empty( $email ) && ! is_email( $email ) ) || empty( $email ) ) {
 			return get_bloginfo( 'admin_email' );
 		}
 		return $email;
-	}
-
-	/**
-	 * Get sender from name
-	 *
-	 * @return string
-	 */
-	public static function get_keep_log_setting(): string {
-		return get_option( self::SETTING_PREFIX . 'keep_log', false );
 	}
 
 	/**
@@ -353,30 +309,30 @@ class Module extends Module_Base {
 
 		if ( ! is_wp_error( $response ) ) {
 			update_option( self::SETTING_PREFIX . 'plan_data', $response );
-			update_option( self::SETTING_PREFIX . 'is_valid_plan_data', true );
+			update_option( Settings::IS_VALID_PLAN_DATA, true );
 		} else {
 			error_log( esc_html( $response->get_error_message() ) );
-			update_option( self::SETTING_PREFIX . 'is_valid_plan_data', false );
+			update_option( Settings::IS_VALID_PLAN_DATA, false );
 		}
 	}
 
 	public static function clear_settings_cache() {
-		wp_cache_delete( self::SETTING_PREFIX . 'keep_log', 'option' );
-		wp_cache_delete( self::SETTING_PREFIX . 'close_post_connect_modal', 'option' );
-		wp_cache_delete( self::SETTING_PREFIX . 'plan_data', 'option' );
-		wp_cache_delete( self::SETTING_PREFIX . 'sender_email_prefix', 'option' );
-		wp_cache_delete( self::SETTING_PREFIX . 'from_name', 'option' );
-		wp_cache_delete( self::SETTING_PREFIX . 'reply_to_email', 'option' );
+		wp_cache_delete( Settings::KEEP_LOG, 'option' );
+		wp_cache_delete( Settings::CLOSE_POST_CONNECT_MODAL, 'option' );
+		wp_cache_delete( Settings::PLAN_DATA, 'option' );
+		wp_cache_delete( Settings::SENDER_EMAIL_PREFIX, 'option' );
+		wp_cache_delete( Settings::FROM_NAME, 'option' );
+		wp_cache_delete( Settings::REPLY_TO_EMAIL, 'option' );
 		wp_cache_delete( Settings::CUSTOM_DOMAIN_DNS_RECORDS, 'option' );
 		wp_cache_delete( Settings::CUSTOM_DOMAIN_VERIFICATION_STATUS, 'option' );
 		wp_cache_delete( Settings::CUSTOM_DOMAIN_VERIFICATION_RECORDS, 'option' );
-		wp_cache_delete( self::SETTING_PREFIX . 'custom_domain_verification_start_time', 'option' );
+		wp_cache_delete( Settings::CUSTOM_DOMAIN_VERIFICATION_START_TIME, 'option' );
 		wp_cache_delete( Config::APP_PREFIX . Data::SUBSCRIPTION_ID, 'option' );
 		wp_cache_delete( Config::APP_PREFIX . Data::ACCESS_TOKEN, 'option' );
 		wp_cache_delete( Config::APP_PREFIX . Data::CLIENT_ID, 'option' );
 		wp_cache_delete( Config::APP_PREFIX . Data::HOME_URL, 'option' );
 		wp_cache_delete( Config::APP_PREFIX . Data::OPTION_OWNER_USER_ID, 'option' );
-		wp_cache_delete( self::SETTING_PREFIX . 'is_valid_plan_data', 'option'  );
+		wp_cache_delete( Settings::IS_VALID_PLAN_DATA, 'option' );
 	}
 
 	/**
@@ -387,38 +343,25 @@ class Module extends Module_Base {
 		self::refresh_plan_data();
 		self::clear_settings_cache();
 
-		$default_plan_data = [
-			'plan'   => [
-				'quota' => [
-					'allowed' => 0,
-					'used'    => 0,
-				],
-				'name'  => 'None',
-			],
-			'sender' => [
-				'sender_in_used' => '',
-			],
-			'failed' => true,
-		];
-
 		return [
 			'isConnected'            => Connect::is_connected(),
 			'isUrlMismatch'          => ! Connect_Utils::is_valid_home_url(),
 			'subscriptionId'         => Data::get_subscription_id(),
-			'keepLog'                => self::get_keep_log_setting(),
+			'keepLog'                => Settings::get( Settings::KEEP_LOG ),
 			'isDevelopment'          => defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG,
 			'siteUrl'                => wp_parse_url( get_site_url(), PHP_URL_HOST ),
-			'closePostConnectModal'  => get_option( self::SETTING_PREFIX . 'close_post_connect_modal' ),
+			'closePostConnectModal'  => Settings::get( Settings::CLOSE_POST_CONNECT_MODAL ),
 			'senderEmail'            => self::get_sender_email() ?? '',
 			'fromName'               => self::get_sender_from_name(),
 			'replyToEmail'           => self::get_sender_reply_email(),
-			'settings'               => get_option( self::SETTING_PREFIX . 'plan_data', $default_plan_data ),
+			'settings'               => Settings::get( Settings::PLAN_DATA ),
 			'customDomainDNSRecords' => Settings::get( Settings::CUSTOM_DOMAIN_DNS_RECORDS ),
 			'verificationStatus'     => Settings::get( Settings::CUSTOM_DOMAIN_VERIFICATION_STATUS ),
 			'verificationRecords'    => Settings::get( Settings::CUSTOM_DOMAIN_VERIFICATION_RECORDS ),
-			'verificationStartTime'  => get_option( self::SETTING_PREFIX . 'custom_domain_verification_start_time' ),
-			'isValidPlanData'		 => get_option( self::SETTING_PREFIX . 'is_valid_plan_data' ),
+			'verificationStartTime'  => Settings::get( Settings::CUSTOM_DOMAIN_VERIFICATION_START_TIME ), //TODO: check use of this
+			'isValidPlanData'        => Settings::get( Settings::IS_VALID_PLAN_DATA ),
 			'isRTL' => is_rtl(),
+			'lastLogRefresh'         => Log_Pull::check_refresh_time(),
 		];
 	}
 

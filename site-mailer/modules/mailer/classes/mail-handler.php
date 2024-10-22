@@ -3,12 +3,14 @@
 namespace SiteMailer\Modules\Mailer\Classes;
 
 use Exception;
+use Throwable;
 use SiteMailer\Classes\Database\Exceptions\Missing_Table_Exception;
 use SiteMailer\Classes\Services\Client;
 use SiteMailer\Modules\Logs\Database\Log_Entry;
 use SiteMailer\Modules\Logs\Database\Logs_Table;
 use SiteMailer\Modules\Mailer\Components\Rate_Limit_Retry;
 use SiteMailer\Modules\Settings\Module as Settings;
+use SiteMailer\Modules\Settings\Classes\Settings as SettingsModule;
 
 /**
  * The class is responsible for the send email to external service
@@ -22,10 +24,12 @@ class Mail_Handler {
 		'failed'  => 'failed',
 		'not_sent' => 'not sent',
 		'rate_limit' => 'rate limit',
+		'not_valid' => 'not valid',
 	];
 	const ERROR_MSG = [
 		'quota_exceeded' => 'Quota Status Guard Request Failed!: Quota exceeded',
 		'rate_limit' => 'Too many requests',
+		'empty_to_msg' => 'Email `To` or `message` empty',
 	];
 
 	private array $email;
@@ -40,7 +44,7 @@ class Mail_Handler {
 	 * @param array $ids
 	 *
 	 * @return void
-	 * @throws Missing_Table_Exception
+	 * @throws Throwable
 	 */
 	public static function resend_mails( array $ids ): void {
 		$ids_int = array_map( 'absint', $ids );
@@ -67,7 +71,7 @@ class Mail_Handler {
 	 * @param string $address
 	 *
 	 * @return void
-	 * @throws Missing_Table_Exception
+	 * @throws Throwable
 	 */
 	public static function send_test_mail( string $address ): void {
 		$current_timestamp = current_time( 'mysql' );
@@ -131,6 +135,30 @@ class Mail_Handler {
 	}
 
 	/**
+	 * Check 'To' and 'message' for empty or wrong
+	 * @throws Throwable
+	 */
+	private function check_mail() {
+		$list = $this->email['to'];
+		$split_list = is_array( $list ) ? $list : explode( ',', $list );
+		$mail_list = [];
+
+		if ( $split_list ) {
+			foreach ( $split_list as $item ) {
+				$trimmed = trim( $item );
+				if ( filter_var( $trimmed, FILTER_VALIDATE_EMAIL ) ) {
+					$mail_list[] = $trimmed;
+				}
+			}
+		}
+
+		$this->email['to'] = $mail_list;
+		if ( empty( $this->email['to'] ) || empty( $this->email['message'] ) ) {
+			$this->error_handler( self::ERROR_MSG['empty_to_msg'] );
+		}
+	}
+
+	/**
 	 * Create and save log entry
 	 * @param string|null $status
 	 *
@@ -138,7 +166,7 @@ class Mail_Handler {
 	 * @throws Missing_Table_Exception
 	 */
 	private function write_log( string $status = null ) {
-		$keep_log = Settings::get_keep_log_setting();
+		$keep_log = SettingsModule::get( SettingsModule::KEEP_LOG );
 		$datetime_wp = current_time( 'mysql' );
 
 		$required = [
@@ -173,6 +201,9 @@ class Mail_Handler {
 			case self::ERROR_MSG['rate_limit']:
 				$status = self::LOG_STATUSES['rate_limit'];
 				Rate_Limit_Retry::schedule_resend_email( $this->log_id, $this->email );
+				break;
+			case self::ERROR_MSG['empty_to_msg']:
+				$status = self::LOG_STATUSES['not_valid'];
 				break;
 			default:
 				$status = self::LOG_STATUSES['failed'];
@@ -224,6 +255,7 @@ class Mail_Handler {
 	 * @param string $type Normal|Resend|Test
 	 * @param string|null $source
 	 *
+	 * @throws Throwable
 	 */
 	public function __construct( array $email, string $type, string $source = null ) {
 		$this->log_id = wp_generate_uuid4();
@@ -231,5 +263,6 @@ class Mail_Handler {
 		$this->type = $type;
 		$this->prepare_mail( $email );
 		$this->get_mail_attachments();
+		$this->check_mail();
 	}
 }

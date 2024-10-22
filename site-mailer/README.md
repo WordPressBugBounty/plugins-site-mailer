@@ -5,7 +5,7 @@
 **Requires at least:** 6.3 \
 **Tested up to:** 6.6 \
 **Requires PHP:** 7.4 \
-**Stable tag:** 1.0.1 \
+**Stable tag:** 1.1.0 \
 **License:** GPL-3 \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -121,26 +121,37 @@ Yes, the Elementor team offers full support for Site Mailer questions. You can c
 
 ### 1. Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.
 
-![Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-1.png)
+![Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.](./wporg-assets/screenshot-1.png)
 
 ### 2. Email setup complete in one click – Your site is now ready to send emails using a default sender.
 
-![Email setup complete in one click – Your site is now ready to send emails using a default sender.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-2.png)
+![Email setup complete in one click – Your site is now ready to send emails using a default sender.](./wporg-assets/screenshot-2.png)
 
 ### 3. Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.
 
-![Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-3.png)
+![Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.](./wporg-assets/screenshot-3.png)
 
 ### 4. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.
 
-![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-4.png)
+![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.](./wporg-assets/screenshot-4.png)
 
 ### 5. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.
 
-![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-5.png)
+![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.](./wporg-assets/screenshot-5.png)
 
 
 ## Changelog
+
+### 1.1.0 2024-22-10
+
+* Tweak: Refactor settings module for easier maintenance.
+* Tweak: Only send if email is valid.
+* Tweak: When all emails are delivered statistics donut color is now green.
+* Tweak: Refresh data button design and flow improvements.
+* Fix: Custom domain sender prefix update not working.
+* Fix: Incorrect direction of some components in RTL.
+* Fix: Firefox not displaying connect illustration correctly.
+
 
 ### 1.0.1- 2024-08-10
 

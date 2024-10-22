@@ -26,6 +26,7 @@ class Logs_Table extends Table {
 		'deferred',
 		'not sent',
 		'rate limit',
+		'not valid',
 	];
 
 	const ID = 'id';

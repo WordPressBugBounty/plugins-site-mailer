@@ -4,7 +4,7 @@ Tags: email, email log, SMTP, email API, sender
 Requires at least: 6.3
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -114,6 +114,16 @@ Yes, the Elementor team offers full support for Site Mailer questions. You can c
 5. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.
 
 == Changelog ==
+= 1.1.0 2024-22-10 =
+* Tweak: Refactor settings module for easier maintenance.
+* Tweak: Only send if email is valid.
+* Tweak: When all emails are delivered statistics donut color is now green.
+* Tweak: Refresh data button design and flow improvements.
+* Fix: Custom domain sender prefix update not working.
+* Fix: Incorrect direction of some components in RTL.
+* Fix: Firefox not displaying connect illustration correctly.
+
+
 = 1.0.1- 2024-08-10 =
 * New: Connect helper for users that are not connected
 * New: Added 100% quota reached notice for admin pages

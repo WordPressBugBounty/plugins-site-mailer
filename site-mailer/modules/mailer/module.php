@@ -2,11 +2,11 @@
 
 namespace SiteMailer\Modules\Mailer;
 
-use Exception;
-use SiteMailer\Classes\Database\Exceptions\Missing_Table_Exception;
+use SiteMailer\Classes\Logger;
 use SiteMailer\Classes\Module_Base;
 use SiteMailer\Modules\Mailer\Classes\Mail_Handler;
 use SiteMailer\Modules\Connect\Module as Connect;
+use Throwable;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -54,15 +54,16 @@ class Module extends Module_Base {
 	 * @type string|string[] $attachments Paths to files to attach.
 	 *
 	 * @return bool
-	 * @throws Exception
+	 * @throws Throwable
 	 */
 	public function send( $sent, array $email ): bool {
 		//Send request to the external service
-		$handler = new Mail_Handler( $email, 'Normal' );
 		try {
+			$handler = new Mail_Handler( $email, 'Normal' );
 			$handler->send();
 			return true;
-		} catch ( Exception $e ) {
+		} catch ( Throwable $t ) {
+			Logger::error( $t );
 			return false;
 		}
 	}
