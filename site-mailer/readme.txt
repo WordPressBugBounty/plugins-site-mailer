@@ -4,7 +4,7 @@ Tags: email, email log, SMTP, email API, sender
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -49,6 +49,9 @@ Send a test email to confirm your site is properly configured for seamless trans
 = Resend Failed Emails =
 Did an email fail to deliver? Easily resend it with a single click to ensure your message reaches its intended recipient.
 
+= Suppression List =
+Enable easy unsubscribe options for your emails. Track and manage all unsubscribed recipients directly in the Suppressions tab.
+
  == Benefits ==
 
 * **No Integration Needed**: Use Site Mailer without the need for additional plugins or integrations.
@@ -78,7 +81,6 @@ This plugin uses a 3rd party service operated by Elementor, which accepts Email 
 3. Go to the Site Mailer tab within the Settings menu.
 4. Press the ‘Connect’ button and follow the instructions.
 
-
 == Frequently Asked Questions ==
 
 = How does the Site Mailer plugin work? =
@@ -105,6 +107,10 @@ Using the PHP mail() function can cause issues with email deliverability and sec
 
 Yes, the Elementor team offers full support for Site Mailer questions. You can contact us via our [Contact Page](https://go.elementor.com/wp-repo-wp-dash-sm-contact-us/)
 
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/site-mailer).
+
 == Screenshots ==
 
 1. Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.
@@ -114,6 +120,14 @@ Yes, the Elementor team offers full support for Site Mailer questions. You can c
 5. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.
 
 == Changelog ==
+= 1.2.0 2024-19-11 =
+* New: Added Support for List-Unsubscribe headers
+* New: Added Suppressions management UI
+* New: Statuses for multiple recipients in Logs
+* Tweak: Logs table UI corrections
+* Fix: Settings crashes when the to is null in logs
+
+
 = 1.1.0 2024-22-10 =
 * Tweak: Refactor settings module for easier maintenance.
 * Tweak: Only send if email is valid.
