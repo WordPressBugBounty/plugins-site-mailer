@@ -42,7 +42,7 @@ class Logs_Table extends Table {
 	 * will be set to the current version.
 	 */
 	public static function install(): void {
-		$installed_ver = get_option( static::DB_VERSION_FLAG_NAME, -1 );
+		$installed_ver = get_option( static::DB_VERSION_FLAG_NAME, - 1 );
 
 		if ( static::DB_VERSION !== $installed_ver ) {
 
@@ -70,7 +70,7 @@ class Logs_Table extends Table {
 	 * build_sql_string
 	 * add GROUP BY to Table::build_sql_string
 	 *
-	*/
+	 */
 	public static function build_sql_string( $fields = '*', $where = '1', int $limit = null, int $offset = null, string $join = '', array $order_by = [], $group_by = '' ): string {
 		if ( is_array( $fields ) ) {
 			$fields = implode( ', ', $fields );
@@ -110,17 +110,17 @@ class Logs_Table extends Table {
 
 	public static function get_columns(): array {
 		return [
-			self::ID         => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::INT, 11 ),
+			self::ID => [
+				'type' => Database_Constants::get_col_type( Database_Constants::INT, 11 ),
 				'flags' => Database_Constants::build_flags_string( [
 					Database_Constants::UNSIGNED,
 					Database_Constants::NOT_NULL,
 					Database_Constants::AUTO_INCREMENT,
 				] ),
-				'key'   => Database_Constants::get_primary_key_string( self::ID ),
+				'key' => Database_Constants::get_primary_key_string( self::ID ),
 			],
-			self::API_ID     => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::VARCHAR, 255 ),
+			self::API_ID => [
+				'type' => Database_Constants::get_col_type( Database_Constants::VARCHAR, 255 ),
 				'flags' => Database_Constants::build_flags_string( [
 					Database_Constants::DEFAULT,
 					'\'\'',
@@ -128,57 +128,47 @@ class Logs_Table extends Table {
 
 				'key' => Database_Constants::build_key_string( Database_Constants::KEY, self::API_ID ),
 			],
-			self::TO         => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::TEXT ),
+			self::TO => [
+				'type' => Database_Constants::get_col_type( Database_Constants::TEXT ),
+			],
+			self::SUBJECT => [
+				'type' => Database_Constants::get_col_type( Database_Constants::VARCHAR, 768 ),
 				'flags' => Database_Constants::build_flags_string( [
 					Database_Constants::DEFAULT,
 					'\'\'',
 				] ),
 			],
-			self::SUBJECT    => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::VARCHAR, 768 ),
-				'flags' => Database_Constants::build_flags_string( [
-					Database_Constants::DEFAULT,
-					'\'\'',
-				] ),
-			],
-			self::HEADERS    => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::TEXT ),
+			self::HEADERS => [
+				'type' => Database_Constants::get_col_type( Database_Constants::TEXT ),
 				'flags' => Database_Constants::build_flags_string( [
 					Database_Constants::DEFAULT,
 					Database_Constants::NULL,
 				] ),
 			],
-			self::MESSAGE    => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::TEXT ),
+			self::MESSAGE => [
+				'type' => Database_Constants::get_col_type( Database_Constants::TEXT ),
 				'flags' => Database_Constants::build_flags_string( [
 					Database_Constants::DEFAULT,
 					Database_Constants::NULL,
 				] ),
 			],
-			self::ACTIVITY   => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::TEXT ),
-				'flags' => Database_Constants::build_flags_string( [
-					Database_Constants::DEFAULT,
-					'\'\'',
-				] ),
+			self::ACTIVITY => [
+				'type' => Database_Constants::get_col_type( Database_Constants::TEXT ),
 			],
 			self::SOURCE => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::TEXT ),
+				'type' => Database_Constants::get_col_type( Database_Constants::TEXT ),
 				'flags' => Database_Constants::build_flags_string( [
 					Database_Constants::NOT_NULL,
-					Database_Constants::DEFAULT,
-					'\'\'',
 				] ),
 			],
-			self::STATUS     => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::VARCHAR, 255 ),
+			self::STATUS => [
+				'type' => Database_Constants::get_col_type( Database_Constants::VARCHAR, 255 ),
 			],
 			self::OPENED => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::BOOLEAN ),
+				'type' => Database_Constants::get_col_type( Database_Constants::BOOLEAN ),
 			],
 			self::CREATED_AT => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::DATETIME ),
+				'type' => Database_Constants::get_col_type( Database_Constants::DATETIME ),
 				'flags' => Database_Constants::build_flags_string( [
 					Database_Constants::NOT_NULL,
 					Database_Constants::DEFAULT,
@@ -186,7 +176,7 @@ class Logs_Table extends Table {
 				] ),
 			],
 			self::UPDATED_AT => [
-				'type'  => Database_Constants::get_col_type( Database_Constants::DATETIME ),
+				'type' => Database_Constants::get_col_type( Database_Constants::DATETIME ),
 				'flags' => Database_Constants::build_flags_string( [
 					Database_Constants::NOT_NULL,
 					Database_Constants::DEFAULT,

@@ -20,6 +20,7 @@ class Unsubscribe_List {
 		if ( ! self::$instance ) {
 			self::$instance = new self();
 		}
+
 		return self::$instance;
 	}
 
@@ -35,17 +36,16 @@ class Unsubscribe_List {
 		$emails = array_merge( $to, $cc, $bcc );
 
 		// Surround each email with single quotes
-		$quoted_emails = array_map(function( $email ) {
+		$quoted_emails = array_map( function ( $email ) {
 			return "'" . esc_sql( $email ) . "'";
-		}, $emails);
+		}, $emails );
 
 		// Create the where condition
 		$where = '`email` IN (' . implode( ',', $quoted_emails ) . ')';
-
 		$results = Suppressions_Entry::get_suppressions( 'email', $where );
 
-		return array_map(function( $result ) {
+		return array_map( function ( $result ) {
 			return $result->email;
-		}, $results);
+		}, $results );
 	}
 }

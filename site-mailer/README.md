@@ -5,7 +5,7 @@
 **Requires at least:** 6.3 \
 **Tested up to:** 6.7 \
 **Requires PHP:** 7.4 \
-**Stable tag:** 1.2.0 \
+**Stable tag:** 1.2.1 \
 **License:** GPL-3 \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -149,16 +149,16 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 ## Changelog
 
-### 1.2.0 2024-19-11
+### 1.2.0 2024-11-19
 
-* New: Added Support for List-Unsubscribe headers
-* New: Added Suppressions management UI
-* New: Statuses for multiple recipients in Logs
-* Tweak: Logs table UI corrections
-* Fix: Settings crashes when the to is null in logs
+* New: Added support for `List-Unsubscribe` headers
+* New: Added suppressions management interface
+* New: Added statuses for multiple recipients in email logs
+* Tweak: Some logs table UI corrections
+* Fix: Settings crashes when the "To" field is null in email logs
 
 
-### 1.1.0 2024-22-10
+### 1.1.0 2024-10-22
 
 * Tweak: Refactor settings module for easier maintenance.
 * Tweak: Only send if email is valid.
@@ -169,7 +169,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Fix: Firefox not displaying connect illustration correctly.
 
 
-### 1.0.1- 2024-08-10
+### 1.0.1- 2024-10-08
 
 * New: Connect helper for users that are not connected
 * New: Added 100% quota reached notice for admin pages
@@ -183,7 +183,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Fix: Support multiple recipients emails
 
 
-### 1.0.0- 2024-25-09
+### 1.0.0- 2024-09-25
 
 * New: Added option to see full email on hover in logs.
 * New: Added a popup to show warning when plan data is not available.
@@ -202,6 +202,6 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Fix: Custom domain prefix overriding default sender in edge cases.
 
 
-### 0.0.1- 2024-16-09
+### 0.0.1- 2024-09-16
 
 * Initial release

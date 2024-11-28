@@ -22,11 +22,13 @@ class Mail_Validator {
 		if ( ! self::$instance ) {
 			self::$instance = new self();
 		}
+
 		return self::$instance;
 	}
 
 	/**
 	 * Validate email object
+	 *
 	 * @param array $email Array of the `wp_mail()` arguments.
 	 *
 	 * @return array
@@ -37,7 +39,7 @@ class Mail_Validator {
 		$cc = array_key_exists( 'cc', $headers ) ? $this->build_mail_list( $headers['cc'] ) : [];
 		$bcc = array_key_exists( 'bcc', $headers ) ? $this->build_mail_list( $headers['bcc'] ) : [];
 
-		$unsubscribed = Unsubscribe_List::get_instance()->get_unsubscribed( $to, $cc, $bcc );
+		$unsubscribed = ! empty( $to ) ? Unsubscribe_List::get_instance()->get_unsubscribed( $to, $cc, $bcc ) : [];
 
 		$email['to'] = array_diff( $to, $unsubscribed );
 		$headers['cc'] = implode( ', ', array_diff( $cc, $unsubscribed ) );
@@ -75,12 +77,15 @@ class Mail_Validator {
 		$to = $this->build_email_status_list( $email['to'], 'to', $unsubscribed );
 		$cc = array_key_exists( 'cc', $headers ) ? $this->build_email_status_list( $headers['cc'], 'cc', $unsubscribed ) : [];
 		$bcc = array_key_exists( 'bcc', $headers ) ? $this->build_email_status_list( $headers['bcc'], 'bcc', $unsubscribed ) : [];
+
 		return array_merge( $bcc, $cc, $to );
 	}
 
 	/**
 	 * Check if headers is an object
+	 *
 	 * @param mixed $value
+	 *
 	 * @return bool
 	 */
 	public function is_object( $value ): bool {
@@ -89,7 +94,9 @@ class Mail_Validator {
 
 	/**
 	 * Get header value
+	 *
 	 * @param array $headers
+	 *
 	 * @return array
 	 */
 	public function get_properties_value( array $headers ): array {
@@ -102,12 +109,15 @@ class Mail_Validator {
 				$object_headers[ strtolower( $key ) ] = $item[0];
 			}
 		}
+
 		return $object_headers;
 	}
 
 	/**
 	 * Split headers from string to key-value array
+	 *
 	 * @param string|array $headers
+	 *
 	 * @return array
 	 */
 	public function split_headers( $headers ): array {
@@ -125,12 +135,15 @@ class Mail_Validator {
 				}
 			}
 		}
+
 		return $object_headers;
 	}
 
 	/**
 	 * Build mail list from comma-separated string or array
+	 *
 	 * @param string|array|null $list
+	 *
 	 * @return array
 	 */
 	public function build_mail_list( $list = null ): array {
@@ -157,7 +170,7 @@ class Mail_Validator {
 	 *
 	 * @param string|array $list
 	 * @param string $type
-	 * @param array $unsubscribed*
+	 * @param array $unsubscribed *
 	 *
 	 * @return array
 	 */
@@ -176,7 +189,7 @@ class Mail_Validator {
 				} elseif ( in_array( $trimmed, $unsubscribed, true ) ) {
 					$status = Mail_Handler::LOG_STATUSES['unsubscribed'];
 				} else {
-					$status = Mail_Handler::LOG_STATUSES['pending'];
+					$status = false;
 				}
 
 				$mail_list[ $trimmed ] = [
