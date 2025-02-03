@@ -34,7 +34,7 @@ class Mail_Validator {
 	 * @return array
 	 */
 	public function validate( array $email ): array {
-		$headers = $this->split_headers( $email['headers'] );
+		$headers = array_key_exists( 'headers', $email ) ? $this->split_headers( $email['headers'] ) : [];
 		$to = $this->build_mail_list( $email['to'] );
 		$cc = array_key_exists( 'cc', $headers ) ? $this->build_mail_list( $headers['cc'] ) : [];
 		$bcc = array_key_exists( 'bcc', $headers ) ? $this->build_mail_list( $headers['bcc'] ) : [];
@@ -73,7 +73,7 @@ class Mail_Validator {
 	 * @return array $email Array of the `wp_mail()` arguments.
 	 */
 	public function validate_for_log_status( array $email, array $unsubscribed ): array {
-		$headers = $this->split_headers( $email['headers'] );
+		$headers = array_key_exists( 'headers', $email ) ? $this->split_headers( $email['headers'] ) : [];
 		$to = $this->build_email_status_list( $email['to'], 'to', $unsubscribed );
 		$cc = array_key_exists( 'cc', $headers ) ? $this->build_email_status_list( $headers['cc'], 'cc', $unsubscribed ) : [];
 		$bcc = array_key_exists( 'bcc', $headers ) ? $this->build_email_status_list( $headers['bcc'], 'bcc', $unsubscribed ) : [];

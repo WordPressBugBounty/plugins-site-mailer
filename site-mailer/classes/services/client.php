@@ -51,7 +51,7 @@ class Client {
 			// site to connect
 			'site_url' => trailingslashit( home_url() ),
 			// current user
-			'client_id' => get_current_user_id(),
+			'local_id' => get_current_user_id(),
 			// User Agent
 			'user_agent' => ! empty( $_SERVER['HTTP_USER_AGENT'] )
 				? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) )

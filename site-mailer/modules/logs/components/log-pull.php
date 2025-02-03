@@ -75,8 +75,9 @@ class Log_Pull {
 			'log',
 		);
 
-		if ( empty( $response ) || is_wp_error( $response ) ) {
+		if ( is_wp_error( $response ) ) { // Log error only on is_wp_error, empty response is correct
 			Logger::error( 'Cannot get logs response from mail service' );
+
 			return;
 		}
 

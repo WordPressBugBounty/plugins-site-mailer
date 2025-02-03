@@ -2,7 +2,6 @@
 
 namespace SiteMailer\Modules\Mailer;
 
-use SiteMailer\Classes\Logger;
 use SiteMailer\Classes\Module_Base;
 use SiteMailer\Modules\Mailer\Classes\Mail_Handler;
 use SiteMailer\Modules\Connect\Module as Connect;
@@ -33,7 +32,7 @@ class Module extends Module_Base {
 		];
 	}
 
-	public static function routes_list() : array {
+	public static function routes_list(): array {
 		return [
 			'Resend_Mails',
 			'Send_Test_Mail',
@@ -56,15 +55,22 @@ class Module extends Module_Base {
 	 * @return bool
 	 * @throws Throwable
 	 */
-	public function send( $sent, array $email ): bool {
-		//Send request to the external service
+	public function send( $sent, array $email ) {
+		// Validate and prepare email to send
 		try {
 			$handler = new Mail_Handler( $email, 'Normal' );
+		} catch ( Throwable $t ) {
+			return false;
+		}
+
+		// Send request to the external service
+		try {
 			$handler->send();
+
 			return true;
 		} catch ( Throwable $t ) {
-			Logger::error( $t );
-			return false;
+			// try to send via default WP function
+			return $sent;
 		}
 	}
 

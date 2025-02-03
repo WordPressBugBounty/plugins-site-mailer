@@ -5,13 +5,15 @@
 **Requires at least:** 6.3 \
 **Tested up to:** 6.7 \
 **Requires PHP:** 7.4 \
-**Stable tag:** 1.2.1 \
+**Stable tag:** 1.2.2 \
 **License:** GPL-3 \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.en.html
 
 Effortlessly manage transactional emails with Site Mailer. High deliverability, logs and statistics, and no SMTP plugins needed.
 
 ## Description
+
+[![ISite Mailer intro video](https://img.youtube.com/vi/1hOxkEO-22I/0.jpg)](https://www.youtube.com/watch?v=1hOxkEO-22I)
 
 https://www.youtube.com/watch?v=1hOxkEO-22I
 
@@ -128,26 +130,38 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 ### 1. Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.
 
-![Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.](./wporg-assets/screenshot-1.png)
+![Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-1.png)
 
 ### 2. Email setup complete in one click – Your site is now ready to send emails using a default sender.
 
-![Email setup complete in one click – Your site is now ready to send emails using a default sender.](./wporg-assets/screenshot-2.png)
+![Email setup complete in one click – Your site is now ready to send emails using a default sender.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-2.png)
 
 ### 3. Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.
 
-![Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.](./wporg-assets/screenshot-3.png)
+![Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-3.png)
 
 ### 4. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.
 
-![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.](./wporg-assets/screenshot-4.png)
+![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-4.png)
 
 ### 5. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.
 
-![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.](./wporg-assets/screenshot-5.png)
+![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-5.png)
 
 
 ## Changelog
+
+### 1.2.2 2024-02-03
+
+* Tweak: Fallback to native `wp_mail` on error
+* Fix: Statistics incorrect count when deleting logs
+* Fix: Connect refresh token stuck in edge cases
+* Fix: Connect mismatch when home url is not site url
+
+### 1.2.1 2024-11-28
+
+* Fix: Some strings are not translatable
+* Fix: RTL issue in certain scenarios
 
 ### 1.2.0 2024-11-19
 
@@ -156,7 +170,6 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * New: Added statuses for multiple recipients in email logs
 * Tweak: Some logs table UI corrections
 * Fix: Settings crashes when the "To" field is null in email logs
-
 
 ### 1.1.0 2024-10-22
 
@@ -167,7 +180,6 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Fix: Custom domain sender prefix update not working.
 * Fix: Incorrect direction of some components in RTL.
 * Fix: Firefox not displaying connect illustration correctly.
-
 
 ### 1.0.1- 2024-10-08
 
@@ -181,7 +193,6 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Fix: Settings panel Not loading in edge cases
 * Fix: Refresh token error and reconnect
 * Fix: Support multiple recipients emails
-
 
 ### 1.0.0- 2024-09-25
 
@@ -200,7 +211,6 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Fix: invalid plugin header in some hosting environments
 * Fix: UI jumps when pressing navigating between tabs.
 * Fix: Custom domain prefix overriding default sender in edge cases.
-
 
 ### 0.0.1- 2024-09-16
 

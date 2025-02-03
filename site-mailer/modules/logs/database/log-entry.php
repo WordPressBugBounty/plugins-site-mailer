@@ -45,7 +45,7 @@ class Log_Entry extends Entry {
 		array $order_by = []
 	): array {
 
-		$logs_table     = Logs_Table::table_name();
+		$logs_table = Logs_Table::table_name();
 		$statuses_table = Statuses_Table::table_name();
 
 		$fields = [
@@ -98,11 +98,10 @@ class Log_Entry extends Entry {
 	 * @return void
 	 */
 	public static function delete_logs( array $ids ): void {
-		$ids_int = array_map( 'absint', $ids );
 		$escaped = implode( ',', array_map( function ( $item ) {
-			return Logs_Table::db()->prepare( '%d', $item );
-		}, $ids_int ) );
-		$query   = 'DELETE FROM `' . Logs_Table::table_name() . '` WHERE `' . Logs_Table::ID . '` IN(' . $escaped . ')';
+			return Logs_Table::db()->prepare( '%s', $item );
+		}, $ids ) );
+		$query = 'DELETE FROM `' . Logs_Table::table_name() . '` WHERE `' . Logs_Table::API_ID . '` IN(' . $escaped . ')';
 		Logs_Table::query( $query );
 	}
 

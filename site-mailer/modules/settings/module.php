@@ -164,10 +164,6 @@ class Module extends Module_Base {
 				'POST',
 				'site/info'
 			);
-
-			if ( ! empty( $response->site_url ) && Data::get_home_url() !== $response->site_url ) {
-				Data::set_home_url( $response->site_url );
-			}
 		}
 		if ( ! is_wp_error( $response ) ) {
 			update_option( self::SETTING_PREFIX . 'plan_data', $response );
@@ -196,27 +192,27 @@ class Module extends Module_Base {
 			],
 			'close_post_connect_modal' => [
 				'type' => 'boolean',
-				'description' => __( 'Site Mailer Close Post Connect Modal', 'site-mailer' ),
+				'description' => _x( 'Site Mailer Close Post Connect Modal', 'Descrption for API usage. no need to translate', 'site-mailer' ),
 			],
 			'from_name' => [
 				'type' => 'string',
-				'description' => __( 'Site Mailer From Email', 'site-mailer' ),
+				'description' => _x( 'Site Mailer From Email', 'Descrption for API usage. no need to translate', 'site-mailer' ),
 			],
 			'reply_to_email' => [
 				'type' => 'string',
-				'description' => __( 'Site Mailer Reply Email', 'site-mailer' ),
+				'description' => _x( 'Site Mailer Reply Email', 'Descrption for API usage. no need to translate', 'site-mailer' ),
 			],
 			'sender_domain' => [
 				'type' => 'string',
-				'description' => __( 'Site Mailer Sender Domain', 'site-mailer' ),
+				'description' => _x( 'Site Mailer Sender Domain', 'Descrption for API usage. no need to translate', 'site-mailer' ),
 			],
 			'sender_email_prefix' => [
 				'type' => 'string',
-				'description' => __( 'Site Mailer Sender Mail Prefix', 'site-mailer' ),
+				'description' => _x( 'Site Mailer Sender Mail Prefix', 'Descrption for API usage. no need to translate', 'site-mailer' ),
 			],
 			'custom_domain_dns_records' => [
 				'type' => 'string',
-				'description' => __( 'Site Mailer custom domain DNS records', 'site-mailer' ),
+				'description' => _x( 'Site Mailer custom domain DNS records', 'Descrption for API usage. no need to translate', 'site-mailer' ),
 			],
 			'verification_started' => [
 				'type' => 'boolean',
@@ -346,10 +342,6 @@ class Module extends Module_Base {
 			'POST',
 			'site/info'
 		);
-
-		if ( ! empty( $response->site_url ) && Data::get_home_url() !== $response->site_url ) {
-			Data::set_home_url( $response->site_url );
-		}
 
 		if ( ! is_wp_error( $response ) ) {
 			update_option( self::SETTING_PREFIX . 'plan_data', $response );

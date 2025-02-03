@@ -220,8 +220,10 @@ class Mail_Handler {
 		$required = [
 			Logs_Table::API_ID => $this->log_id,
 			Logs_Table::SUBJECT => $this->email['subject'],
-			Logs_Table::TO => wp_json_encode( $this->initial_email['to'] ), // possible array of strings
-			Logs_Table::HEADERS => wp_json_encode( $this->initial_email['headers'] ), // possible array of strings
+			// possible array of strings
+			Logs_Table::TO => wp_json_encode( $this->initial_email['to'] ),
+			// possible array of strings
+			Logs_Table::HEADERS => wp_json_encode( array_key_exists( 'headers', $this->initial_email ) ? $this->initial_email['headers'] : '' ),
 			Logs_Table::SOURCE => $this->source,
 			Logs_Table::CREATED_AT => $datetime_wp,
 			Logs_Table::UPDATED_AT => $datetime_wp,
@@ -262,7 +264,11 @@ class Mail_Handler {
 		}
 
 		$this->write_log( $status );
-		throw new Exception( esc_html( $error ) );
+
+		// Don't throw an error on 'rate_limit'
+		if ( self::ERROR_MSG['rate_limit'] !== $error ) {
+			throw new Exception( esc_html( $error ) );
+		}
 	}
 
 	/**

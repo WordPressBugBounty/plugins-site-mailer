@@ -66,12 +66,12 @@ class Status_Entry extends Entry {
 	public static function patch_status( string $id, string $email, string $status ): void {
 		Statuses_Table::update(
 			[
-				Statuses_Table::STATUS     => $status,
+				Statuses_Table::STATUS => $status,
 				Statuses_Table::UPDATED_AT => current_time( 'mysql' ),
 			],
 			[
 				Statuses_Table::LOG_ID => $id,
-				Statuses_Table::EMAIL  => $email,
+				Statuses_Table::EMAIL => $email,
 			]
 		);
 	}
@@ -85,13 +85,13 @@ class Status_Entry extends Entry {
 	public static function set_opened( string $id, string $email ): void {
 		Statuses_Table::update(
 			[
-				Statuses_Table::OPENED     => true,
-				Statuses_Table::STATUS     => 'delivered',
+				Statuses_Table::OPENED => true,
+				Statuses_Table::STATUS => 'delivered',
 				Statuses_Table::UPDATED_AT => current_time( 'mysql' ),
 			],
 			[
 				Statuses_Table::LOG_ID => $id,
-				Statuses_Table::EMAIL  => $email,
+				Statuses_Table::EMAIL => $email,
 			]
 		);
 	}
@@ -111,6 +111,19 @@ class Status_Entry extends Entry {
 				COUNT(CASE WHEN `opened` = 1 THEN 1 END) as opened",
 			$where
 		);
+	}
+
+	/**
+	 * @param array $ids
+	 *
+	 * @return void
+	 */
+	public static function delete_statuses( array $ids ): void {
+		$escaped = implode( ',', array_map( function ( $item ) {
+			return Statuses_Table::db()->prepare( '%s', $item );
+		}, $ids ) );
+		$query = 'DELETE FROM `' . Statuses_Table::table_name() . '` WHERE `' . Statuses_Table::LOG_ID . '` IN(' . $escaped . ')';
+		Statuses_Table::query( $query );
 	}
 
 	/**
