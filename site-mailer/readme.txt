@@ -4,7 +4,7 @@ Tags: email, email log, SMTP, email API, sender
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -120,6 +120,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 5. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.
 
 == Changelog ==
+= 1.2.3 2024-02-04 =
+* Fix: Resend not working in some cases
+
 = 1.2.2 2024-02-03 =
 * Tweak: Fallback to native `wp_mail` on error
 * Fix: Statistics incorrect count when deleting logs

@@ -54,16 +54,15 @@ class Mail_Handler {
 	 * @throws Throwable
 	 */
 	public static function resend_mails( array $ids ): void {
-		$ids_int = array_map( 'absint', $ids );
 		$escaped = implode( ',', array_map( function ( $item ) {
-			return Logs_Table::db()->prepare( '%d', $item );
-		}, $ids_int ) );
-		$where = Logs_Table::table_name() . '.id IN (' . $escaped . ')';
+			return Logs_Table::db()->prepare( '%s', $item );
+		}, $ids ) );
+		$where = Logs_Table::table_name() . '.' . Logs_Table::API_ID . ' IN (' . $escaped . ')';
 		$logs = Log_Entry::get_logs( $where );
 		// TODO: Discuss and add possibility to resend mails as array with one request
 		foreach ( $logs as $log ) {
-			$log->to = json_decode( $log->to );
-			$log->headers = json_decode( $log->headers );
+			$log->to = json_decode( $log->to, true );
+			$log->headers = json_decode( $log->headers, true );
 			$handler = new self( (array) $log, 'Resend', 'Plugin' );
 			$handler->send();
 		}

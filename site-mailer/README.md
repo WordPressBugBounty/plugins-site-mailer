@@ -5,16 +5,14 @@
 **Requires at least:** 6.3 \
 **Tested up to:** 6.7 \
 **Requires PHP:** 7.4 \
-**Stable tag:** 1.2.2 \
+**Stable tag:** 1.2.3 \
 **License:** GPL-3 \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.en.html
 
 Effortlessly manage transactional emails with Site Mailer. High deliverability, logs and statistics, and no SMTP plugins needed.
 
 ## Description
-
 [![ISite Mailer intro video](https://img.youtube.com/vi/1hOxkEO-22I/0.jpg)](https://www.youtube.com/watch?v=1hOxkEO-22I)
-
 https://www.youtube.com/watch?v=1hOxkEO-22I
 
 Has your WordPress site stopped sending emails? Are emails from your WordPress site landing in spam or not getting delivered? Are customers complaining about missing messages?
@@ -130,26 +128,30 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 ### 1. Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.
 
-![Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-1.png)
+![Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.](https://ps.w.org/site-mailer/assets/screenshot-1.png)
 
 ### 2. Email setup complete in one click – Your site is now ready to send emails using a default sender.
 
-![Email setup complete in one click – Your site is now ready to send emails using a default sender.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-2.png)
+![Email setup complete in one click – Your site is now ready to send emails using a default sender.](https://ps.w.org/site-mailer/assets/screenshot-2.png)
 
 ### 3. Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.
 
-![Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-3.png)
+![Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.](https://ps.w.org/site-mailer/assets/screenshot-3.png)
 
 ### 4. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.
 
-![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-4.png)
+![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.](https://ps.w.org/site-mailer/assets/screenshot-4.png)
 
 ### 5. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.
 
-![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.](https://ps.w.org/site-mailer---smtp-replacement,-email-api-deliverability-&-email-log/assets/screenshot-5.png)
+![Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.](https://ps.w.org/site-mailer/assets/screenshot-5.png)
 
 
 ## Changelog
+
+### 1.2.3 2024-02-04
+
+* Fix: Resend not working in some cases
 
 ### 1.2.2 2024-02-03
 
