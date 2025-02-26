@@ -47,16 +47,20 @@ class Get_Suppressions extends Route_Base {
 			}
 
 			$params = $request->get_query_params();
+			$page = sanitize_text_field( $params['page'] );
+			$request_limit = sanitize_text_field( $params['limit'] );
+			$request_order = sanitize_text_field( $params['order'] );
+			$request_order_by = sanitize_text_field( $params['orderBy'] );
 
 			//Set offset
-			$offset = ( $params['page'] - 1 ) * $params['limit'];
+			$offset = ( $page - 1 ) * $request_limit;
 
 			// Set limit from 1 to 100
-			$limit = max( $params['limit'], 1 ) !== 1 ? min( $params['limit'], 100 ) : 1;
+			$limit = max( $request_limit, 1 ) !== 1 ? min( $request_limit, 100 ) : 1;
 
 			// Set order/default order
-			$order = $params['orderBy'] && $params['order']
-				? [ '`' . $params['orderBy'] . '`' => $params['order'] ]
+			$order = $request_order_by && $request_order
+				? [ '`' . $request_order_by . '`' => $request_order ]
 				: [ Suppressions_Table::CREATED_AT => 'DESC' ];
 
 			$suppressions = Suppressions_Entry::get_suppressions(
@@ -71,9 +75,9 @@ class Get_Suppressions extends Route_Base {
 			$total = Suppressions_Entry::get_suppressions_count();
 
 			return $this->respond_success_json( [
-				'items'  => $suppressions,
+				'items' => $suppressions,
 				'total' => $total[0]->count,
-			]);
+			] );
 		} catch ( Throwable $t ) {
 			return $this->respond_error_json( [
 				'message' => $t->getMessage(),

@@ -40,11 +40,13 @@ class Verify extends Route_Base {
 			}
 
 			$data = $request->get_json_params();
+			$domain = sanitize_text_field( $data['data']['domain'] );
+			$prefix = sanitize_text_field( $data['data']['emailPrefix'] );
 			$reply_to = Settings_Module::get_sender_reply_email();
 
 			$response = Domain_Handler::verify_domain( [
-				'domain' => $data['data']['domain'],
-				'email_prefix' => $data['data']['emailPrefix'],
+				'domain' => $domain,
+				'email_prefix' => $prefix,
 				'reply_to' => $reply_to,
 			] );
 

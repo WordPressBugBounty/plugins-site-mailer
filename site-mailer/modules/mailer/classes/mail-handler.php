@@ -190,6 +190,26 @@ class Mail_Handler {
 	}
 
 	/**
+	 * Sanitize email body
+	 *
+	 * @param string $html
+	 *
+	 * @return string
+	 */
+	public static function sanitize_html( string $html ): string {
+		// Remove JavaScript-style comments, malformed comment endings, and JavaScript protocol URLs
+		$html = preg_replace( [
+			'/--!>\s*/',                      // Remove `--!>`
+			'/\bjavascript\s*:[^"\'>]+/i',     // Remove `javascript:` URLs
+			'/\s+on[a-zA-Z]+\s*=\s*["\'][^"\']*["\']/i', // Remove event handlers (onClick, onMouseOver, etc.)
+		], '', $html );
+
+		// Remove disallowed tags (script, iframe, object, etc.)
+		return preg_replace( '/<\s*(script|iframe|object|embed|form|input)[^>]*>.*?<\/\s*\1\s*>/is', '', $html );
+	}
+
+
+	/**
 	 * Create and save log entry
 	 *
 	 * @param string|null $status
@@ -218,7 +238,7 @@ class Mail_Handler {
 
 		$required = [
 			Logs_Table::API_ID => $this->log_id,
-			Logs_Table::SUBJECT => $this->email['subject'],
+			Logs_Table::SUBJECT => self::sanitize_html( $this->email['subject'] ),
 			// possible array of strings
 			Logs_Table::TO => wp_json_encode( $this->initial_email['to'] ),
 			// possible array of strings
@@ -228,7 +248,7 @@ class Mail_Handler {
 			Logs_Table::UPDATED_AT => $datetime_wp,
 		];
 		$on_keep = $keep_log ? [
-			Logs_Table::MESSAGE => $this->email['message'],
+			Logs_Table::MESSAGE => self::sanitize_html( $this->email['message'] ),
 		] : [];
 		$log = new Log_Entry( [ 'data' => array_merge( $required, $on_keep ) ] );
 		$log->create();

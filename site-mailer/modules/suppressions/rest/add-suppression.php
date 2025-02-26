@@ -41,22 +41,23 @@ class Add_Suppression extends Route_Base {
 			}
 
 			$params = $request->get_json_params();
-			if ( filter_var( $params['email'], FILTER_VALIDATE_EMAIL ) ) {
-				$suppression = Suppressions_Entry::get_suppressions('`id`', [
-					'email' => $params['email'],
-				]);
+			$email = sanitize_email( $params['email'] );
+			if ( filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
+				$suppression = Suppressions_Entry::get_suppressions( '`id`', [
+					'email' => $email,
+				] );
 				if ( $suppression ) {
 					return $this->respond_error_json( [
 						'message' => __( 'Email already in suppressions list', 'site-mailer' ),
 						'code' => 'internal_server_error',
 					] );
 				}
-				$new_suppression = new Suppressions_Entry([
+				$new_suppression = new Suppressions_Entry( [
 					'data' => [
-						Suppressions_Table::EMAIL => $params['email'],
+						Suppressions_Table::EMAIL => $email,
 						Suppressions_Table::REASON => 'manual',
 					],
-				]);
+				] );
 				$new_suppression->create();
 			}
 

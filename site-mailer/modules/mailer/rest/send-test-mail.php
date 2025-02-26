@@ -47,7 +47,8 @@ class Send_Test_Mail extends Route_Base {
 			}
 
 			$params = $request->get_json_params();
-			Mail_Handler::send_test_mail( $params['email'] );
+			$email = sanitize_email( $params['email'] );
+			Mail_Handler::send_test_mail( $email );
 
 			return $this->respond_success_json();
 		} catch ( Throwable $t ) {

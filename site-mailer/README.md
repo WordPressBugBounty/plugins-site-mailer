@@ -5,14 +5,14 @@
 **Requires at least:** 6.3 \
 **Tested up to:** 6.7 \
 **Requires PHP:** 7.4 \
-**Stable tag:** 1.2.3 \
+**Stable tag:** 1.2.4 \
 **License:** GPL-3 \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.en.html
 
 Effortlessly manage transactional emails with Site Mailer. High deliverability, logs and statistics, and no SMTP plugins needed.
 
 ## Description
-[![ISite Mailer intro video](https://img.youtube.com/vi/1hOxkEO-22I/0.jpg)](https://www.youtube.com/watch?v=1hOxkEO-22I)
+
 https://www.youtube.com/watch?v=1hOxkEO-22I
 
 Has your WordPress site stopped sending emails? Are emails from your WordPress site landing in spam or not getting delivered? Are customers complaining about missing messages?
@@ -148,6 +148,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 
 ## Changelog
+
+### 1.2.4 2024-02-26
+
+* Tweak: Harden overall security
+* Fix: Connection lost in some cases
 
 ### 1.2.3 2024-02-04
 

@@ -40,20 +40,23 @@ class Get_Statuses extends Route_Base {
 			}
 
 			$params = $request->get_query_params();
+			$log_id = sanitize_text_field( $params['log_id'] );
+			$page = sanitize_text_field( $params['page'] );
+			$request_limit = sanitize_text_field( $params['limit'] );
 
 			$where = [
 				[
 					'column' => Statuses_Table::LOG_ID,
-					'value' => $params['log_id'],
+					'value' => $log_id,
 					'operator' => '=',
 				],
 			];
 
 			//Set offset
-			$offset = ( $params['page'] - 1 ) * $params['limit'];
+			$offset = ( $page - 1 ) * $request_limit;
 
 			// Set limit from 1 to 100
-			$limit = max( $params['limit'], 1 ) !== 1 ? min( $params['limit'], 100 ) : 1;
+			$limit = max( $request_limit, 1 ) !== 1 ? min( $request_limit, 100 ) : 1;
 
 			// Set order/default order
 			$order = [ Statuses_Table::EMAIL => 'ASC' ];

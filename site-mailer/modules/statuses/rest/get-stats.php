@@ -43,12 +43,13 @@ class Get_Stats extends Route_Base {
 			}
 
 			$params = $request->get_query_params();
+			$period = sanitize_text_field( $params['period'] );
 
 			// Add period
-			$where = $params['period'] ? [
+			$where = $period ? [
 				[
 					'column' => 'created_at',
-					'value' => $params['period'],
+					'value' => $period,
 					'operator' => '>',
 					'relation_after' => 'AND',
 				],
@@ -65,9 +66,9 @@ class Get_Stats extends Route_Base {
 			$log_stats = Log_Entry::get_logs_stats( $where );
 			$merged = array_merge_recursive( (array) $stats[0], (array) $log_stats[0] );
 
-			$result = array_map(function( $item ) {
+			$result = array_map( function ( $item ) {
 				return is_array( $item ) ? array_sum( $item ) : $item;
-			}, $merged);
+			}, $merged );
 
 			return $this->respond_success_json( $result );
 		} catch ( Throwable $t ) {

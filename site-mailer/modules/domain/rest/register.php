@@ -39,14 +39,16 @@ class Register extends Route_Base {
 			}
 
 			$data = $request->get_json_params();
+			$domain = sanitize_text_field( $data['data']['domain'] );
+			$prefix = sanitize_text_field( $data['data']['emailPrefix'] );
 
 			$response = Domain_Handler::register_domain( [
-				'domain' => $data['data']['domain'],
-				'emailPrefix' => $data['data']['emailPrefix'],
+				'domain' => $domain,
+				'emailPrefix' => $prefix,
 			] );
 
-			update_option( Settings::SENDER_DOMAIN, $data['data']['domain'] );
-			update_option( Settings::SENDER_EMAIL_PREFIX, $data['data']['emailPrefix'] );
+			update_option( Settings::SENDER_DOMAIN, $domain );
+			update_option( Settings::SENDER_EMAIL_PREFIX, $prefix );
 
 			if ( isset( $response->message ) && 'Domain already registered with this site' === $response->message ) {
 				update_option( Settings::CUSTOM_DOMAIN_DNS_RECORDS, wp_json_encode( $response->domain ) );

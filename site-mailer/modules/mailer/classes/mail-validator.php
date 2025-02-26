@@ -147,7 +147,8 @@ class Mail_Validator {
 	 * @return array
 	 */
 	public function build_mail_list( $list = null ): array {
-		$split_list = is_array( $list ) ? $list : explode( ',', $list );
+		$list_values = is_object( $list ) ? get_object_vars( $list ) : $list;
+		$split_list = is_array( $list_values ) ? $list_values : explode( ',', $list_values );
 		$mail_list = [];
 
 		if ( $split_list ) {

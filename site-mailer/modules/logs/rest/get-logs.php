@@ -49,25 +49,30 @@ class Get_Logs extends Route_Base {
 			}
 
 			$params = $request->get_query_params();
+			$page = sanitize_text_field( $params['page'] );
+			$request_limit = sanitize_text_field( $params['limit'] );
+			$request_order = sanitize_text_field( $params['order'] );
+			$request_order_by = sanitize_text_field( $params['orderBy'] );
+			$period = sanitize_text_field( $params['period'] );
 
 			// Set limit from 1 to 100
-			$limit = max( $params['limit'], 1 ) !== 1 ? min( $params['limit'], 100 ) : 1;
+			$limit = max( $request_limit, 1 ) !== 1 ? min( $request_limit, 100 ) : 1;
 
 			//Set offset
-			$offset = ( $params['page'] - 1 ) * $params['limit'];
+			$offset = ( $page - 1 ) * $request_limit;
 
 			// Add period
-			$where = $params['period'] ? [
+			$where = $period ? [
 				[
 					'column' => Logs_Table::table_name() . '.created_at',
-					'value' => $params['period'],
+					'value' => $period,
 					'operator' => '>',
 				],
 			] : '1';
 
 			// Set order/default order
-			$order_by = $params['orderBy'] && $params['order']
-				? [ Logs_Table::table_name() . '.' . $params['orderBy'] => $params['order'] ]
+			$order_by = $request_order_by && $request_order
+				? [ Logs_Table::table_name() . '.' . $request_order_by => $request_order ]
 				: [ Logs_Table::table_name() . '.created_at' => 'DESC' ];
 
 			$logs = Log_Entry::get_logs( $where, $limit, $offset, $order_by );
@@ -75,9 +80,9 @@ class Get_Logs extends Route_Base {
 			$total = Log_Entry::get_logs_count( $where );
 
 			return $this->respond_success_json( [
-				'items'  => $logs,
+				'items' => $logs,
 				'total' => $total[0]->count,
-			]);
+			] );
 		} catch ( Throwable $t ) {
 			return $this->respond_error_json( [
 				'message' => $t->getMessage(),

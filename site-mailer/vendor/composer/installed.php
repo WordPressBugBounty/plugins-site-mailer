@@ -3,7 +3,7 @@
         'name' => 'elementor/site-mailer',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '08621fac9379999d5f5a6436bb283ad26dfbc840',
+        'reference' => '2c92a288ff483f4f87d2c8522643897123a6a69e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'elementor/site-mailer' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '08621fac9379999d5f5a6436bb283ad26dfbc840',
+            'reference' => '2c92a288ff483f4f87d2c8522643897123a6a69e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
