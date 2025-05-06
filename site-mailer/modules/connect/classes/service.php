@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Service {
 	const REFRESH_TOKEN_LOCK = '_connect_refresh_token';
+	const APP_TYPE = 'APP_MAILER';
 
 	/**
 	 * Registers new client and returns client ID
@@ -239,6 +240,11 @@ class Service {
 	 */
 	public static function request( string $url, array $args, int $valid_response_code = 200 ): ?array {
 		$args['timeout'] = 30;
+		$args['headers'] = array_replace_recursive( [
+			'x-elementor-app-type' => self::APP_TYPE,
+		], $args['headers'] ?? [] );
+
+		error_log( print_r( $args, true ) );
 
 		$response = wp_remote_request( $url, $args );
 

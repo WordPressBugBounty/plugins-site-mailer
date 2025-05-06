@@ -24,6 +24,8 @@ final class Manager {
 			'Domain',
 			'Suppressions',
 			'Statuses',
+			'Reviews',
+			'whats-new',
 		];
 	}
 

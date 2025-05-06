@@ -4,7 +4,7 @@ Tags: email, email log, SMTP, email API, sender
 Requires at least: 6.3
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -116,35 +116,43 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 1. Dashboard – Email sending activity, including total emails sent, delivery and open rates, and failed emails.
 2. Email setup complete in one click – Your site is now ready to send emails using a default sender.
 3. Settings- configure your sender details. You can add a custom domain, send test emails, and save content for future resends.
-4. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 1.
-5. Custom Domain Authentication Wizard - Guides you through adding a custom domain - 2.
+4. Custom Domain Authentication Wizard - Guides you through adding a custom domain.
+5. Custom Domain Authentication Wizard - Guides you through adding a custom domain with DNS settings.
 
 == Changelog ==
-= 1.2.4 2024-02-26 =
+
+= 1.2.5 - 2024-05-06 =
+* New: Added Walk through video
+* New: Added "What's New" section
+* New: Added Review flow
+* Tweak: Harden connect security
+* Fix: URL mismatch flow issues
+
+= 1.2.4 - 2024-02-26 =
 * Tweak: Harden overall security
 * Fix: Connection lost in some cases
 
-= 1.2.3 2024-02-04 =
+= 1.2.3 - 2024-02-04 =
 * Fix: Resend not working in some cases
 
-= 1.2.2 2024-02-03 =
+= 1.2.2 - 2024-02-03 =
 * Tweak: Fallback to native `wp_mail` on error
 * Fix: Statistics incorrect count when deleting logs
 * Fix: Connect refresh token stuck in edge cases
 * Fix: Connect mismatch when home url is not site url
 
-= 1.2.1 2024-11-28 =
+= 1.2.1 - 2024-11-28 =
 * Fix: Some strings are not translatable
 * Fix: RTL issue in certain scenarios
 
-= 1.2.0 2024-11-19 =
+= 1.2.0 - 2024-11-19 =
 * New: Added support for `List-Unsubscribe` headers
 * New: Added suppressions management interface
 * New: Added statuses for multiple recipients in email logs
 * Tweak: Some logs table UI corrections
 * Fix: Settings crashes when the "To" field is null in email logs
 
-= 1.1.0 2024-10-22 =
+= 1.1.0 - 2024-10-22 =
 * Tweak: Refactor settings module for easier maintenance.
 * Tweak: Only send if email is valid.
 * Tweak: When all emails are delivered statistics donut color is now green.
@@ -153,7 +161,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Fix: Incorrect direction of some components in RTL.
 * Fix: Firefox not displaying connect illustration correctly.
 
-= 1.0.1- 2024-10-08 =
+= 1.0.1 - 2024-10-08 =
 * New: Connect helper for users that are not connected
 * New: Added 100% quota reached notice for admin pages
 * Tweak: Improved "Verify Domain" buttons UI
@@ -165,7 +173,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Fix: Refresh token error and reconnect
 * Fix: Support multiple recipients emails
 
-= 1.0.0- 2024-09-25 =
+= 1.0.0 - 2024-09-25 =
 * New: Added option to see full email on hover in logs.
 * New: Added a popup to show warning when plan data is not available.
 * Tweak: Statistics Pie chart labeling.

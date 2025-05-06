@@ -21,6 +21,7 @@ class Settings {
 	public const CUSTOM_DOMAIN_VERIFICATION_START_TIME = 'site_mailer_custom_domain_verification_start_time';
 	public const FROM_NAME = 'site_mailer_from_name';
 	public const REPLY_TO_EMAIL = 'site_mailer_reply_to_email';
+	public const PLAN_SCOPE = 'site_mailer_plan_scope';
 
 	/**
 	 * Returns plugin settings data by option name typecasted to an appropriate data type.
@@ -71,5 +72,17 @@ class Settings {
 			default:
 				return $data;
 		}
+	}
+
+	/**
+	 * Update the settings data by option name.
+	 *
+	 * @param string $option_name
+	 * @param $value
+	 *
+	 * @return bool
+	 */
+	public static function set( string $option_name, $value ) : bool {
+		return update_option( $option_name, $value, false );
 	}
 }

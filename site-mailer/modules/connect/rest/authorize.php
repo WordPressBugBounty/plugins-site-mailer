@@ -33,10 +33,17 @@ class Authorize extends Route_Base {
 	}
 
 	public function POST( WP_REST_Request $request ) {
-		$this->verify_nonce_and_capability(
+		$valid = $this->verify_nonce_and_capability(
 			$request->get_param( self::NONCE_NAME ),
 			self::NONCE_NAME
 		);
+
+		if ( is_wp_error( $valid ) ) {
+			return $this->respond_error_json( [
+				'message' => $valid->get_error_message(),
+				'code' => 'forbidden',
+			] );
+		}
 
 		if ( Connect::is_connected() && Utils::is_valid_home_url() ) {
 			return $this->respond_error_json( [
@@ -55,6 +62,8 @@ class Authorize extends Route_Base {
 			if ( ! Utils::is_valid_home_url() ) {
 				if ( $request->get_param( 'update_redirect_uri' ) ) {
 					Service::update_redirect_uri();
+					// Return a success message if the redirect URI was updated. No need to authorize again.
+					return $this->respond_success_json( [ 'success' => true ] );
 				} else {
 					return $this->respond_error_json( [
 						'message' => esc_html__( 'Connected domain mismatch', 'site-mailer' ),

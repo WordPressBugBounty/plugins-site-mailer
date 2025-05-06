@@ -140,8 +140,21 @@ class Module extends Module_Base {
 		wp_localize_script(
 			'admin',
 			'siteMailerSettingsData',
-			[ 'wpRestNonce' => wp_create_nonce( 'wp_rest' ) ]
+			[
+				'wpRestNonce' => wp_create_nonce( 'wp_rest' ),
+				'pluginEnv' => self::get_plugin_env(),
+				'planData' => Settings::get( Settings::PLAN_DATA ),
+				'planScope' => Settings::get( Settings::PLAN_SCOPE ),
+			]
 		);
+	}
+
+	/**
+	 * Get Mixpanel project Token
+	 * @return string
+	 */
+	private static function get_plugin_env() : string {
+		return apply_filters( 'site_mailer_plugin_env', 'production' );
 	}
 
 	/**
@@ -168,6 +181,10 @@ class Module extends Module_Base {
 		if ( ! is_wp_error( $response ) ) {
 			update_option( self::SETTING_PREFIX . 'plan_data', $response );
 			update_option( Settings::IS_VALID_PLAN_DATA, true );
+
+			if ( isset( $response->scopes ) ) {
+				Settings::set( Settings::PLAN_SCOPE, $response->scopes );
+			}
 		} else {
 			Logger::error( esc_html( $response->get_error_message() ) );
 			update_option( Settings::IS_VALID_PLAN_DATA, false );
@@ -244,6 +261,9 @@ class Module extends Module_Base {
 			'hide_logs_status_refresh_infotip' => [
 				'type' => 'boolean',
 				'show_in_rest' => true,
+			],
+			'hide_walkthrough_modal' => [
+				'type' => 'boolean',
 			],
 		];
 

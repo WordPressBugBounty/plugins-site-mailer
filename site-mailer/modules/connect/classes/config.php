@@ -16,7 +16,7 @@ class Config {
 	const BASE_URL = 'https://my.elementor.com/connect';
 	const ADMIN_PAGE = 'site-mailer-settings';
 	const APP_TYPE = 'app_mailer';
-	const SCOPES = 'openid offline_access';
+	const SCOPES = 'openid offline_access share_usage_data';
 	const STATE_NONCE = 'site_mailer_auth_nonce';
 	const CONNECT_MODE = 'site';
 }

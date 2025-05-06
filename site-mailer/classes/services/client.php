@@ -27,7 +27,7 @@ class Client {
 	 * used for testing
 	 * @param $instance
 	 */
-	public static function set_instance($instance) {
+	public static function set_instance( $instance ) {
 		self::$instance = $instance;
 	}
 
@@ -156,8 +156,8 @@ class Client {
 			$body = true;
 		}
 
-		// Return with no content on successfull delettion of domain from service.
-		if ( 204 === $response_code ) {
+		// Return with no content on successfull deletion of domain from service.
+		if ( in_array( $response_code, [ 201, 204 ] ) ) {
 			$body = true;
 			return $body;
 		}
@@ -174,6 +174,12 @@ class Client {
 			$this->refreshed = true;
 			$args['headers'] = $this->add_bearer_token( $args['headers'] );
 			return $this->request( $method, $endpoint, $args );
+		}
+
+		// If there is mismatch then trigger the mismatch flow explicitly.
+		if ( ! $this->refreshed && ! empty( $body->message ) && ( false !== strpos( $body->message, 'site url mismatch' ) ) ) {
+			Data::set_home_url( 'https://wrongurl' );
+			return new WP_Error( 401, 'site url mismatch' );
 		}
 
 		if ( 200 !== $response_code ) {
