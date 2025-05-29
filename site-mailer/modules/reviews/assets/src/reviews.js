@@ -10,14 +10,13 @@ domReady( () => {
 
 	// Can't use the settings hook in the global scope so accessing directly
 	const isDevelopment = window?.siteMailerSettingsData?.isDevelopment;
-	const isRTL = window?.siteMailerReviewData?.isRTL;
 	const AppWrapper = Boolean( isDevelopment ) ? StrictMode : Fragment;
 
 	const root = createRoot( rootNode );
 
 	root.render(
 		<AppWrapper>
-			<DirectionProvider rtl={ isRTL }>
+			<DirectionProvider rtl={ false }>
 				<ThemeProvider colorScheme="light">
 					<SettingsProvider>
 						<ReviewsApp />

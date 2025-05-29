@@ -25,8 +25,6 @@ const UserFeedbackForm = ( ) => {
 		isOpened,
 		setIsOpened,
 		setCurrentPage,
-		isRTL,
-		setIsRTL,
 	} = useSettings();
 
 	useEffect( () => {
@@ -36,10 +34,6 @@ const UserFeedbackForm = ( ) => {
 		if ( window?.siteMailerReviewData?.reviewData?.rating > 3 && ! window?.siteMailerReviewData?.reviewData?.repo_review_clicked ) {
 			setCurrentPage( 'review' );
 			setRating( window?.siteMailerReviewData?.reviewData?.rating ); // re-add the saved rating
-		}
-
-		if ( Boolean( window?.siteMailerReviewData?.isRTL ) ) {
-			setIsRTL( true );
 		}
 	}, [] );
 
@@ -117,7 +111,7 @@ const UserFeedbackForm = ( ) => {
 			open={ isOpened }
 			anchorOrigin={ { vertical: 'bottom', horizontal: 'right' } }
 			anchorReference="anchorPosition"
-			anchorPosition={ { top: window.innerHeight - 10, left: isRTL ? 10 : window.innerWidth - 10 } }
+			anchorPosition={ { top: window.innerHeight - 10, left: window.innerWidth - 10 } }
 			id={ id }
 			onClose={ handleClose }
 			anchorEl={ anchorEl.current }

@@ -15,7 +15,6 @@ const SettingsProvider = ( { children } ) => {
 	const [ currentPage, setCurrentPage ] = useState( 'ratings' );
 	const [ nextButtonDisabled, setNextButtonDisabled ] = useState( true );
 	const [ isOpened, setIsOpened ] = useState( true );
-	const [ isRTL, setIsRTL ] = useState( false );
 
 	// Notification
 	const [ showNotification, setShowNotification ] = useState( false );
@@ -41,8 +40,6 @@ const SettingsProvider = ( { children } ) => {
 				setNotificationType,
 				isOpened,
 				setIsOpened,
-				isRTL,
-				setIsRTL,
 			} }
 		>
 			{ children }

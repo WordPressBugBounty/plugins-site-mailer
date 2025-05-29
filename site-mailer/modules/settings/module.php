@@ -12,6 +12,7 @@ use SiteMailer\Modules\Connect\Classes\Utils as Connect_Utils;
 use SiteMailer\Modules\Connect\Module as Connect;
 use SiteMailer\Modules\Logs\Components\Log_Pull;
 use SiteMailer\Modules\Settings\Banners\Sale_Banner;
+use SiteMailer\Modules\Settings\Banners\Birthday_Banner;
 use SiteMailer\Modules\Settings\Classes\Settings;
 use Throwable;
 
@@ -62,6 +63,7 @@ class Module extends Module_Base {
 	public function render_app() {
 		?>
 		<?php Sale_Banner::get_banner( 'https://go.elementor.com/sm-panel-wp-dash-upgrade-panel/' ); ?>
+		<?php Birthday_Banner::get_banner( 'https://go.elementor.com/sm-b-day-banner' ); ?>
 		<!-- The hack required to wrap WP notifications -->
 		<div class="wrap">
 			<h1 style="display: none;" role="presentation"></h1>
