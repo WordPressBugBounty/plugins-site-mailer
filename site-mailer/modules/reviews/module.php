@@ -61,6 +61,7 @@ class Module extends Module_Base {
 			[
 				'wpRestNonce' => wp_create_nonce( 'wp_rest' ),
 				'reviewData' => $this->get_review_data(),
+				'isRTL' => is_rtl(),
 			]
 		);
 

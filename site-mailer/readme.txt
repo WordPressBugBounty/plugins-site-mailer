@@ -4,7 +4,7 @@ Tags: email, email log, SMTP, email API, sender
 Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -120,26 +120,30 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 5. Custom Domain Authentication Wizard - Guides you through adding a custom domain with DNS settings.
 
 == Changelog ==
+= 1.2.7 - 2025-06-16 =
+* Tweak: Delayed translation loading to improve performance
+* Fix: Quota labeling for trial
+* Fix: Translations were not loading
 
-= 1.2.6 - 2024-05-29 =
+= 1.2.6 - 2025-05-29 =
 * Tweak: RTL Support for "What's New"
 * Fix: Quota labeling for trial
 
-= 1.2.5 - 2024-05-06 =
+= 1.2.5 - 2025-05-06 =
 * New: Added Walk through video
 * New: Added "What's New" section
 * New: Added Review flow
 * Tweak: Harden connect security
 * Fix: URL mismatch flow issues
 
-= 1.2.4 - 2024-02-26 =
+= 1.2.4 - 2025-02-26 =
 * Tweak: Harden overall security
 * Fix: Connection lost in some cases
 
-= 1.2.3 - 2024-02-04 =
+= 1.2.3 - 2025-02-04 =
 * Fix: Resend not working in some cases
 
-= 1.2.2 - 2024-02-03 =
+= 1.2.2 - 2025-02-03 =
 * Tweak: Fallback to native `wp_mail` on error
 * Fix: Statistics incorrect count when deleting logs
 * Fix: Connect refresh token stuck in edge cases

@@ -3,7 +3,7 @@
  * Plugin Name: Site Mailer - SMTP Replacement, Email API Deliverability & Email Log
  * Description: Effortlessly manage transactional emails with Site Mailer. High deliverability, logs and statistics, and no SMTP plugins needed.
  * Plugin URI: https://elementor.com/
- * Version: 1.2.6
+ * Version: 1.2.7
  * Author: Elementor.com
  * Author URI: https://go.elementor.com/author-url-sm/
  * Text Domain: site-mailer
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'SITE_MAILER_VERSION', '1.2.6' );
+define( 'SITE_MAILER_VERSION', '1.2.7' );
 define( 'SITE_MAILER_FILE', __FILE__ );
 define( 'SITE_MAILER_PATH', plugin_dir_path( SITE_MAILER_FILE ) );
 define( 'SITE_MAILER_URL', plugins_url( '/', SITE_MAILER_FILE ) );
@@ -34,23 +34,9 @@ final class SiteMailer {
 	 * @access public
 	 */
 	public function __construct() {
-		// Load translation
-		add_action( 'init', [ $this, 'i18n' ] );
 
 		// Init Plugin
 		add_action( 'plugins_loaded', [ $this, 'init' ] );
-	}
-
-	/**
-	 * Load Textdomain
-	 *
-	 * Load plugin localization files.
-	 * Fired by `init` action hook.
-	 *
-	 * @access public
-	 */
-	public function i18n() {
-		load_plugin_textdomain( 'site-mailer' );
 	}
 
 	/**

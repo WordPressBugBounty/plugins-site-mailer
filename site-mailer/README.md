@@ -3,9 +3,9 @@
 **Contributors:** elemntor \
 **Tags:** email, email log, SMTP, email API, sender \
 **Requires at least:** 6.3 \
-**Tested up to:** 6.7 \
+**Tested up to:** 6.8 \
 **Requires PHP:** 7.4 \
-**Stable tag:** 1.2.6 \
+**Stable tag:** 1.2.7 \
 **License:** GPL-3 \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -63,7 +63,7 @@ Did an email fail to deliver? Easily resend it with a single click to ensure you
 
 Enable easy unsubscribe options for your emails. Track and manage all unsubscribed recipients directly in the Suppressions tab.
 
-== Benefits ==
+ == Benefits ==
 
 * **No Integration Needed**: Use Site Mailer without the need for additional plugins or integrations.
 * **Troubleshooting**: Efficiently troubleshoot and resend emails when necessary.
@@ -149,12 +149,18 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 ## Changelog
 
-### 1.2.6 - 2024-05-29
+### 1.2.7 - 2025-06-16
+
+* Tweak: Delayed translation loading to improve performance
+* Fix: Quota labeling for trial
+* Fix: Translations were not loading
+
+### 1.2.6 - 2025-05-29
 
 * Tweak: RTL Support for "What's New"
 * Fix: Quota labeling for trial
 
-### 1.2.5 - 2024-05-06
+### 1.2.5 - 2025-05-06
 
 * New: Added Walk through video
 * New: Added "What's New" section
@@ -162,16 +168,16 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Tweak: Harden connect security
 * Fix: URL mismatch flow issues
 
-### 1.2.4 - 2024-02-26
+### 1.2.4 - 2025-02-26
 
 * Tweak: Harden overall security
 * Fix: Connection lost in some cases
 
-### 1.2.3 - 2024-02-04
+### 1.2.3 - 2025-02-04
 
 * Fix: Resend not working in some cases
 
-### 1.2.2 - 2024-02-03
+### 1.2.2 - 2025-02-03
 
 * Tweak: Fallback to native `wp_mail` on error
 * Fix: Statistics incorrect count when deleting logs
