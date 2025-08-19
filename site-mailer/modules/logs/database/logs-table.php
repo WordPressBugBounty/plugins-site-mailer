@@ -66,12 +66,35 @@ class Logs_Table extends Table {
 		}
 	}
 
+	public static function is_group_by_valid( $group_by ): bool {
+		$raw_columns = str_replace( self::table_name() . '.', '', $group_by );
+		$exploded_group_by = explode( ', ', $raw_columns );
+		$columns_list = array_keys( self::get_columns() );
+
+		return empty( array_diff( $exploded_group_by, $columns_list ) );
+	}
+
+	public static function is_order_by_valid( $order_by ): bool {
+		$is_valid_order_by = true;
+
+		foreach ( $order_by as $column => $direction ) {
+			$raw_column = str_replace( self::table_name() . '.', '', $column );
+			$direction = strtoupper( trim( $direction ) );
+			if ( ! sanitize_sql_orderby( "{$raw_column} {$direction}" ) ) {
+				$is_valid_order_by = false;
+				break;
+			}
+		}
+
+		return $is_valid_order_by;
+	}
+
 	/**
 	 * build_sql_string
 	 * add GROUP BY to Table::build_sql_string
 	 *
 	 */
-	public static function build_sql_string( $fields = '*', $where = '1', int $limit = null, int $offset = null, string $join = '', array $order_by = [], $group_by = '' ): string {
+	public static function build_sql_string( $fields = '*', $where = '1', ?int $limit = null, ?int $offset = null, string $join = '', array $order_by = [], $group_by = '' ): string {
 		if ( is_array( $fields ) ) {
 			$fields = implode( ', ', $fields );
 		}
@@ -89,11 +112,11 @@ class Logs_Table extends Table {
 			$group_by = implode( ', ', $group_by );
 		}
 
-		if ( $group_by ) {
+		if ( $group_by && self::is_group_by_valid( $group_by ) ) {
 			$query_string .= esc_sql( ' GROUP BY ' . $group_by );
 		}
 
-		if ( $order_by ) {
+		if ( $order_by && self::is_order_by_valid( $order_by ) ) {
 			$query_string .= static::build_order_by_sql_string( $order_by );
 		}
 

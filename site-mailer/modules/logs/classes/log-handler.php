@@ -45,6 +45,7 @@ class Log_Handler {
 		if ( empty( $response->status ) ) {
 			throw new Exception( 'Service does not return log status' );
 		}
+
 		return $response->status;
 	}
 
@@ -69,7 +70,7 @@ class Log_Handler {
 				$time = ( time() + ( 60 * 60 * 0.5 ) ) * $retry;
 
 				// Schedule single event and pass params to it
-				wp_schedule_single_event( $time, self::JOB_PREFIX . $log_id, [ $log_id, ++$retry ] );
+				wp_schedule_single_event( $time, self::JOB_PREFIX . $log_id, [ $log_id, ++ $retry ] );
 			}
 		}
 	}
@@ -82,9 +83,15 @@ class Log_Handler {
 		$cron_jobs = wp_get_ready_cron_jobs();
 
 		foreach ( $cron_jobs as $job ) {
-			$job_name = array_keys( $job )[0];
+			$keys = array_keys( $job );
 
-			if ( strpos( $job_name, self::JOB_PREFIX ) === 0 ) {
+			if ( empty( $keys ) ) {
+				continue;
+			}
+
+			$job_name = $keys[0];
+
+			if ( is_string( $job_name ) && strpos( $job_name, self::JOB_PREFIX ) === 0 ) {
 				add_action( $job_name, [ static::class, 'update_log' ], 10, 3 );
 			}
 		}

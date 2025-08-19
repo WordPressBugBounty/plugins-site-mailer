@@ -40,6 +40,7 @@ class Table {
 			static::$table_prefixed = true;
 			static::set_table_prefix();
 		}
+
 		return $wpdb;
 	}
 
@@ -103,6 +104,7 @@ class Table {
 			}
 			$keys[] = $column['key'];
 		}
+
 		return array_merge( $keys, static::get_extra_keys() );
 	}
 
@@ -115,7 +117,7 @@ class Table {
 	 * will be set to the current version.
 	 */
 	public static function install(): void {
-		$installed_ver = get_option( static::DB_VERSION_FLAG_NAME, -1 );
+		$installed_ver = get_option( static::DB_VERSION_FLAG_NAME, - 1 );
 
 		if ( static::DB_VERSION !== $installed_ver ) {
 
@@ -156,6 +158,7 @@ class Table {
 		$sql[] = "\t" . implode( "\n\t", $table_columns );
 		$sql[] = "\t" . implode( ",\n\t", $keys );
 		$sql[] = ") AUTO_INCREMENT=11 {$charset_collate};";
+
 		return implode( "\n", $sql );
 	}
 
@@ -163,6 +166,7 @@ class Table {
 	 * where
 	 *
 	 * Generates a proper WHERE clause for an SQL query.
+	 *
 	 * @param string|array $where Either a string of where clause (returns as is) or an array of
 	 * conditions join with an AND, and in the format of column => (int|string) for exact value comparison
 	 * or in the format of column => [column => string, value =>string|int|array<string|array>,
@@ -191,6 +195,7 @@ class Table {
 			$where_string .= self::maybe_add_relation( $filter, false );
 
 		}
+
 		return $where_string;
 
 	}
@@ -199,6 +204,7 @@ class Table {
 	 * maybe_add_relation
 	 *
 	 * Adds a logical relation ship (AND, OR...) if exists, based on the position (before|after) related to the condition.
+	 *
 	 * @param array $filter Object array describing the where condition that may contain the keys /relation_before/
 	 * or /relation_after/ containing the logical relationship to add to the main WHERE condition.
 	 * @param bool $is_before Whether the current position in the text is before the condition the object describes.
@@ -209,6 +215,7 @@ class Table {
 	 */
 	private static function maybe_add_relation( array $filter, bool $is_before = true ): string {
 		$key_to_check = $is_before ? 'relation_before' : 'relation_after';
+
 		return isset( $filter[ $key_to_check ] ) ? ' ' . $filter[ $key_to_check ] : ' ';
 	}
 
@@ -229,12 +236,13 @@ class Table {
 		if ( is_array( $value ) ) {
 			$param_string = '(';
 			$count = count( $value );
-			for ( $i = 0; $i < $count; $i++ ) {
+			for ( $i = 0; $i < $count; $i ++ ) {
 				$param_string .= is_int( $value[ $i ] ) ? '%d' : '%s';
 				$param_string .= ( $i !== $count - 1 ) ? ', ' : '';
 			}
 			$param_string .= ')';
 		}
+
 		return static::db()->prepare( "$key $operator $param_string", $value );
 	}
 
@@ -243,6 +251,7 @@ class Table {
 	 * This function tries to get the column names for an INSERT operation based on the table column
 	 * definition, and if that fails based on the /data/ parameter.
 	 * The function will remove any column called /id/.
+	 *
 	 * @param mixed $data If a two-dimensional array, where the elements are in the form of column => value,
 	 * the function will try to get the names of the columns off the first element.
 	 *
@@ -279,6 +288,7 @@ class Table {
 	 *
 	 * Selects a single cell in the table and returns its value as string.
 	 * Will return the first cell of the first row in the result set.
+	 *
 	 * @param string|array $fields A string of comma-separated list, or an array of columns from the table.
 	 * Optional.
 	 * Defaults to '*' (all table columns)
@@ -299,7 +309,7 @@ class Table {
 	 *
 	 * @return string|null The query result or NULL on error.
 	 */
-	public static function select_var( $fields = '*', $where = '1', int $limit = null, int $offset = null, string $join = '' ): ?string {
+	public static function select_var( $fields = '*', $where = '1', ?int $limit = null, ?int $offset = null, string $join = '' ): ?string {
 		return static::db()->get_var( static::build_sql_string( $fields, $where, $limit, $offset, $join ) );
 	}
 
@@ -307,6 +317,7 @@ class Table {
 	 * build_sql_string
 	 *
 	 * Generates a SELECT query based on the function input.
+	 *
 	 * @param string|array $fields A string of comma-separated list, or an array of columns from the table.
 	 * Optional.
 	 * Defaults to '*' (all table columns)
@@ -330,7 +341,7 @@ class Table {
 	 *
 	 * @return string The SQL SELECT statement built according to the function parameters.
 	 */
-	private static function build_sql_string( $fields = '*', $where = '1', int $limit = null, int $offset = null, string $join = '', array $order_by = [] ): string {
+	private static function build_sql_string( $fields = '*', $where = '1', ?int $limit = null, ?int $offset = null, string $join = '', array $order_by = [] ): string {
 		if ( is_array( $fields ) ) {
 			$fields = implode( ', ', $fields );
 		}
@@ -363,13 +374,14 @@ class Table {
 	 * build_order_by_sql_string
 	 *
 	 * Generates the ORDER BY clause of the query based on the passed on parameter
+	 *
 	 * @param array<string, string> $order_by An array of column => direction (asc/desc) pairs
 	 *
 	 * @return string The ORDER BY clause for a query
 	 */
 	public static function build_order_by_sql_string( array $order_by ): string {
-		return ' ORDER BY ' . implode( ', ', array_map( function( $column, $direction ) {
-			return "{$column} {$direction}";
+		return ' ORDER BY ' . implode( ', ', array_map( function ( $column, $direction ) {
+				return "{$column} {$direction}";
 		}, array_keys( $order_by ), $order_by ) );
 	}
 
@@ -377,6 +389,7 @@ class Table {
 	 * select
 	 *
 	 * Runs a SELECT query and returns the results as an array of objects, each object represents a row,
+	 *
 	 * @param string|array $fields A string of comma-separated list, or an array of columns from the table.
 	 * Optional.
 	 * Defaults to '*' (all table columns)
@@ -400,9 +413,10 @@ class Table {
 	 *
 	 * @return array|object|\stdClass[]|null On success, an array of objects. Null on error.
 	 */
-	public static function select( $fields = '*', $where = '1', int $limit = null, int $offset = null, $join = '', array $order_by = [] ) {
+	public static function select( $fields = '*', $where = '1', ?int $limit = null, ?int $offset = null, $join = '', array $order_by = [] ) {
 		// TODO: handle $wpdb->last_error
 		$query = static::build_sql_string( $fields, $where, $limit, $offset, $join, $order_by );
+
 		return static::db()->get_results( $query );
 	}
 
@@ -410,6 +424,7 @@ class Table {
 	 * get_col
 	 *
 	 * Returns the first column of the result set.
+	 *
 	 * @param string $column The column to return.
 	 * Optional.
 	 * Defaults to an empty string.
@@ -433,7 +448,7 @@ class Table {
 	 *
 	 * @return string[] Array of the values of the column as strings, or an empty one on error.
 	 */
-	public static function get_col( string $column = '', $where = '1', int $limit = null, int $offset = null, string $join = '', array $order_by = [] ) : array {
+	public static function get_col( string $column = '', $where = '1', ?int $limit = null, ?int $offset = null, string $join = '', array $order_by = [] ): array {
 		return static::db()->get_col( static::build_sql_string( $column, $where, $limit, $offset, $join, $order_by ) );
 	}
 
@@ -441,6 +456,7 @@ class Table {
 	 * first
 	 *
 	 * Returns the first row in the table according to the query filters.
+	 *
 	 * @param string|array $fields A string of comma-separated list, or an array of columns from the table.
 	 * Optional.
 	 * Defaults to '*' (all table columns)
@@ -464,6 +480,7 @@ class Table {
 	 */
 	public static function first( $fields = '*', $where = '1', int $limit = 1, $offset = null, string $join = '' ): ?\stdClass {
 		$result = static::select( $fields, $where, $limit, $offset, $join );
+
 		return ( ! empty( $result[0] ) ) ? $result[0] : null;
 	}
 
@@ -471,6 +488,7 @@ class Table {
 	 * replace
 	 *
 	 * Replace a row in a table if it exists or insert a new row in a table if the row does not already exist.
+	 *
 	 * @param array $data Array of data in the form of column => (raw) value.
 	 * Optional.
 	 * Defaults to an empty array.
@@ -485,6 +503,7 @@ class Table {
 	 * insert
 	 *
 	 * Insert a single row into the table.
+	 *
 	 * @param array $data Array of data to insert in column => (raw) value format.
 	 * Optional, defaults to an empty array.
 	 *
@@ -507,7 +526,7 @@ class Table {
 	 *
 	 * @return false|int Number of rows affected or false on error
 	 */
-	public static function insert_many( array $data = [], string $columns = null ) {
+	public static function insert_many( array $data = [], ?string $columns = null ) {
 		if ( null === $columns ) {
 			$columns = static::get_columns_for_insert( $data );
 			if ( ! $columns ) {
@@ -515,6 +534,7 @@ class Table {
 			}
 		}
 		$insert_sql = 'INSERT INTO ' . static::table_name() . $columns . ' VALUES ' . implode( ",\n", $data ) . ';';
+
 		return static::db()->query( $insert_sql ); // no params so no need for `prepare`.
 	}
 
@@ -522,6 +542,7 @@ class Table {
 	 * update
 	 *
 	 * Updates data in the table, based on where conditionals
+	 *
 	 * @param array<string, mixed> $data Optional. Array of column => (raw) values to be updated.
 	 * Defaults to an empty array.
 	 * @param array<string, mixed> $where Optional. Array of column => (raw) values as a group of AND
@@ -553,6 +574,7 @@ class Table {
 	 * Execute any SQL query on the database.
 	 * It is best used when there is a need for specific,
 	 * custom, or otherwise complex SQL queries.
+	 *
 	 * @param string $query The query to be executed. Defaults to an empty string
 	 *
 	 * @return false|int Boolean true for CREATE, ALTER, TRUNCATE and DROP queries.

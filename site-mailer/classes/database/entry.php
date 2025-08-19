@@ -37,7 +37,7 @@ class Entry {
 	 * Return the entry representing the first row in the table that satisfies the conditions set by the parameters
 	 * and its associated data.
 	 *
-	 * @param string       $by    The name of the field to compare the value parameter to in case the
+	 * @param string $by The name of the field to compare the value parameter to in case the
 	 *                            /value/ parameter is a string, otherwise, ignored.
 	 * @param string|array $value If a string, the value to compare against the column specified
 	 *                            by the /by/ parameter.
@@ -59,7 +59,7 @@ class Entry {
 	 *
 	 * Returns the first row in the table that satisfies the conditions set by the parameters.
 	 *
-	 * @param string       $by    The name of the field to compare the value parameter to in case the
+	 * @param string $by The name of the field to compare the value parameter to in case the
 	 *                            /value/ parameter is a string.
 	 *                            Optional.
 	 *                            Defaults to an empty string.
@@ -71,11 +71,11 @@ class Entry {
 	 *                            relation_before=>string, optional, relation_after=>string, optional]. Optional.
 	 *                            Defaults to an empty string.
 	 *
-	 * @return mixed|\stdClass|null An object representing the row or NULL in case of an error.
+	 * @return mixed|stdClass|null An object representing the row or NULL in case of an error.
 	 */
 	protected function get_by( string $by = '', $value = '' ) {
 		$fields = '*';
-		$where  = is_array( $value ) ? $value : [ $by => $value ];
+		$where = is_array( $value ) ? $value : [ $by => $value ];
 
 		return $this->db_table::first( $fields, $where );
 	}
@@ -165,8 +165,8 @@ class Entry {
 	 *
 	 * Sets an Entry's data field value by the specified key
 	 *
-	 * @param string $name  The key of the field being set
-	 * @param mixed  $value The new value for the field
+	 * @param string $name The key of the field being set
+	 * @param mixed $value The new value for the field
 	 *
 	 * @return $this Returns the current object back
 	 */
@@ -179,8 +179,8 @@ class Entry {
 	 *
 	 * Sets and entry data field value by the specified key
 	 *
-	 * @param string $name  The key of the field being set
-	 * @param mixed  $value The new value for the field
+	 * @param string $name The key of the field being set
+	 * @param mixed $value The new value for the field
 	 *
 	 * @return $this Returns the current object back
 	 */
@@ -215,16 +215,16 @@ class Entry {
 	 *
 	 * The parameters sent to both hooks is a reference to the current object and the value of the /data/ parameter.
 	 *
-	 * @param int|bool    $data  Numbers of rows changed or FALSE on database action failure
+	 * @param int|bool $data Numbers of rows changed or FALSE on database action failure
 	 * @param string|null $event The name of the custom event hook to raise in addition to the /changed/ event hook
 	 *                           Optional.
 	 *                           Defaults to null. In this case, will raise only the defaults /changed/ event.
 	 */
-	private function trigger_change( $data, string $event = null ): void {
+	private function trigger_change( $data, ?string $event = null ): void {
 		if ( $event ) {
 			/**
 			 * event specific
-			 * @var Entry     $this
+			 * @var Entry $this
 			 * @var false|int $data
 			 */
 			do_action( 'site-mailer/db/' . $this->class_short_name() . '/' . $event, $this, $data );
@@ -232,7 +232,7 @@ class Entry {
 
 		/**
 		 * entity change
-		 * @var Entry     $this
+		 * @var Entry $this
 		 * @var false|int $data
 		 */
 		do_action( 'site-mailer/db/' . $this->class_short_name() . '/change', $this, $data );
@@ -248,8 +248,8 @@ class Entry {
 	 * @return false|int The number of rows inserted or FALSE on error.
 	 */
 	public function save() {
-		if ( isset( $this->entry_data[ 'id' ] ) ) {
-			return $this->update( [ 'id' => $this->entry_data[ 'id' ] ] );
+		if ( isset( $this->entry_data['id'] ) ) {
+			return $this->update( [ 'id' => $this->entry_data['id'] ] );
 		}
 
 		return $this->create();
@@ -337,7 +337,7 @@ class Entry {
 	 * @return bool
 	 */
 	public function exists(): bool {
-		return isset( $this->entry_data['id'] ) &&  0 < $this->entry_data['id'];
+		return isset( $this->entry_data['id'] ) && 0 < $this->entry_data['id'];
 	}
 
 	/**
@@ -369,16 +369,16 @@ class Entry {
 		if ( empty( $this->db_table ) ) {
 			throw new Missing_Table_Exception();
 		}
-		if ( isset( $args[ 'by' ] ) && isset( $args[ 'value' ] ) ) {
-			return $this->init_by( $args[ 'by' ], $args[ 'value' ] );
+		if ( isset( $args['by'] ) && isset( $args['value'] ) ) {
+			return $this->init_by( $args['by'], $args['value'] );
 		}
 
-		if ( isset( $args[ 'data' ] ) ) {
-			return $this->init_by_data( $args[ 'data' ] );
+		if ( isset( $args['data'] ) ) {
+			return $this->init_by_data( $args['data'] );
 		}
 
-		if ( isset( $args[ 'id' ] ) ) {
-			return $this->init_by_id( $args[ 'id' ] );
+		if ( isset( $args['id'] ) ) {
+			return $this->init_by_id( $args['id'] );
 		}
 
 		return $this->return_empty();

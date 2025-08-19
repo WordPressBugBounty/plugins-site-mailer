@@ -4,7 +4,7 @@ Tags: email, email log, SMTP, email API, sender
 Requires at least: 6.3
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -120,6 +120,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 5. Custom Domain Authentication Wizard - Guides you through adding a custom domain with DNS settings.
 
 == Changelog ==
+= 1.2.8 - 2025-08-19 =
+New: Bulk resend emails
+Tweak: Added feedback questionnaire shown during plugin deactivation
+Tweak: Ensured compatibility with PHP version 8.4
+
 = 1.2.7 - 2025-06-16 =
 * Tweak: Delayed translation loading to improve performance
 * Fix: Quota labeling for trial

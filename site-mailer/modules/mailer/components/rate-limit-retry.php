@@ -24,13 +24,20 @@ class Rate_Limit_Retry {
 		$cron_jobs = wp_get_ready_cron_jobs();
 
 		foreach ( $cron_jobs as $job ) {
-			$job_name = array_keys( $job )[0];
+			$keys = array_keys( $job );
 
-			if ( strpos( $job_name, self::JOB_PREFIX ) === 0 ) {
+			if ( empty( $keys ) ) {
+				continue;
+			}
+
+			$job_name = $keys[0];
+
+			if ( is_string( $job_name ) && strpos( $job_name, self::JOB_PREFIX ) === 0 ) {
 				add_action( $job_name, [ static::class, 'resend_email' ], 10, 2 );
 			}
 		}
 	}
+
 
 	/**
 	 * Action for resend cron job

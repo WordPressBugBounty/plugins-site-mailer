@@ -76,7 +76,7 @@ const UserFeedbackForm = ( ) => {
 
 	const handleSubmit = async ( close, avoidClosing = false ) => {
 		try {
-			await API.sendFeedback( { rating, feedback } ).then( async () => {
+			const response = await API.sendFeedback( { rating, feedback } ).then( async ( res ) => {
 				await save( {
 					site_mailer_review_data: {
 						...get.data.site_mailer_review_data,
@@ -85,6 +85,8 @@ const UserFeedbackForm = ( ) => {
 						submitted: true,
 					},
 				} );
+
+				return res;
 			} );
 
 			if ( rating && ! feedback ) {
@@ -103,7 +105,16 @@ const UserFeedbackForm = ( ) => {
 			if ( ! avoidClosing ) {
 				await close();
 			}
-			await success( __( 'Thank you for your feedback!', 'site-mailer' ) );
+
+			if ( ! response?.success ) {
+				/**
+				 * Show success message if the feedback was already submitted.
+				 */
+				await success( __( 'Feedback already submitted', 'site-mailer' ) );
+			} else {
+				await success( __( 'Thank you for your feedback!', 'site-mailer' ) );
+			}
+
 			return true;
 		} catch ( e ) {
 			error( __( 'Failed to submit!', 'site-mailer' ) );

@@ -26,6 +26,7 @@ final class Manager {
 			'Statuses',
 			'Reviews',
 			'whats-new',
+			'Deactivation',
 		];
 	}
 

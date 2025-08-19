@@ -13,6 +13,7 @@ use SiteMailer\Modules\Connect\Module as Connect;
 use SiteMailer\Modules\Logs\Components\Log_Pull;
 use SiteMailer\Modules\Settings\Banners\Sale_Banner;
 use SiteMailer\Modules\Settings\Banners\Birthday_Banner;
+use SiteMailer\Modules\Settings\Banners\PLG_Banner;
 use SiteMailer\Modules\Settings\Classes\Settings;
 use Throwable;
 
@@ -64,6 +65,9 @@ class Module extends Module_Base {
 		?>
 		<?php Sale_Banner::get_banner( 'https://go.elementor.com/sm-panel-wp-dash-upgrade-panel/' ); ?>
 		<?php Birthday_Banner::get_banner( 'https://go.elementor.com/sm-b-day-banner' ); ?>
+        <?php PLG_Banner::get_plg_banner( 'forms' ); ?>
+		<?php PLG_Banner::get_plg_banner( 'woocommerce' ); ?>
+		
 		<!-- The hack required to wrap WP notifications -->
 		<div class="wrap">
 			<h1 style="display: none;" role="presentation"></h1>
@@ -424,6 +428,8 @@ class Module extends Module_Base {
 			'isValidPlanData' => Settings::get( Settings::IS_VALID_PLAN_DATA ),
 			'isRTL' => is_rtl(),
 			'lastLogRefresh' => Log_Pull::check_refresh_time(),
+            'sampleBannerDomains' => PLG_Banner::get_banner_data( 'domains' ),
+            'sampleBannerUnsubscribe' => PLG_Banner::get_banner_data( 'unsubscribe' ),
 		];
 	}
 

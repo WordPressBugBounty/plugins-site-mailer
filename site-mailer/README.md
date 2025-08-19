@@ -241,3 +241,4 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 ### 0.0.1- 2024-09-16
 
 * Initial release
+

@@ -244,8 +244,6 @@ class Service {
 			'x-elementor-app-type' => self::APP_TYPE,
 		], $args['headers'] ?? [] );
 
-		error_log( print_r( $args, true ) );
-
 		$response = wp_remote_request( $url, $args );
 
 		if ( is_wp_error( $response ) ) {

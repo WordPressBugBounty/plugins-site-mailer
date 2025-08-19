@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Feedback_Handler {
 
-	const SERVICE_ENDPOINT = 'reviews';
+	const SERVICE_ENDPOINT = 'feedback/reviews';
 
 	/**
 	 * Send request to the service to submit the feedback.

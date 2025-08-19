@@ -15,6 +15,10 @@ use SiteMailer\Modules\Statuses\Database\Status_Entry;
 use SiteMailer\Modules\Statuses\Database\Statuses_Table;
 use Throwable;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * The class is responsible for the send email to external service
  */
@@ -217,7 +221,7 @@ class Mail_Handler {
 	 * @return void
 	 * @throws Missing_Table_Exception
 	 */
-	private function write_log( string $status = null ) {
+	private function write_log( ?string $status = null ) {
 		$keep_log = SettingsModule::get( SettingsModule::KEEP_LOG );
 		$datetime_wp = current_time( 'mysql' );
 		$mail_list = Mail_Validator::get_instance()->validate_for_log_status( $this->initial_email, $this->unsubscribed );
@@ -333,7 +337,7 @@ class Mail_Handler {
 	 *
 	 * @throws Throwable
 	 */
-	public function __construct( array $email, string $type, string $source = null ) {
+	public function __construct( array $email, string $type, ?string $source = null ) {
 		$this->log_id = wp_generate_uuid4();
 		$this->source = $source ?? Caller_Source::get_caller_source();
 		$this->type = $type;

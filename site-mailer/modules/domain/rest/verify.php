@@ -50,7 +50,7 @@ class Verify extends Route_Base {
 				'reply_to' => $reply_to,
 			] );
 
-			if ( $response->valid ) {
+			if ( isset( $response->valid ) && $response->valid ) {
 				update_option( Settings::CUSTOM_DOMAIN_VERIFICATION_STATUS, 'verified' );
 			} else {
 				update_option( Settings::CUSTOM_DOMAIN_VERIFICATION_STATUS, 'failed' );

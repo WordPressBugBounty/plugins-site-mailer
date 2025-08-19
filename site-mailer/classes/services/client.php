@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Client {
 	const BASE_URL = 'https://my.elementor.com/apps/api/v1/site-mailer/';
+	const BASE_URL_FEEDBACK = 'https://feedback-api.prod.apps.elementor.red/apps/api/v1/';
 
 	private bool $refreshed = false;
 
@@ -101,8 +102,20 @@ class Client {
 		);
 	}
 
+	public static function get_client_base_url() {
+		return apply_filters( 'site_mailer_client_base_url', self::BASE_URL );
+	}
+
+	public static function get_feedback_base_url() {
+		return apply_filters( 'site_mailer_feedback_base_url', self::BASE_URL_FEEDBACK );
+	}
+
 	private static function get_remote_url( $endpoint ): string {
-		return self::BASE_URL . $endpoint;
+		if ( strpos( $endpoint, 'feedback/' ) !== false ) {
+			return self::get_feedback_base_url() . $endpoint;
+		}
+
+		return self::get_client_base_url() . $endpoint;
 	}
 
 	protected function is_connected(): bool {
