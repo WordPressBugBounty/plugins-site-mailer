@@ -335,7 +335,7 @@ class Module extends Module_Base {
 	 *
 	 * @return array|bool
 	 */
-	public static function get_unsubscribe_encryption_data(): array {
+	public static function get_unsubscribe_encryption_data() {
 		if ( ! function_exists( 'openssl_encrypt' ) ) {
 			Logger::error( 'the openssl extension is not installed in the environment' );
 

@@ -20,6 +20,7 @@ class Module extends Module_Base {
 			'Conflicts',
 			'Not_Connected',
 			'Quota_Exhausted_Banner',
+			'Renewal_Notice',
 		];
 	}
 

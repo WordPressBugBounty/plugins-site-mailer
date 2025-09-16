@@ -57,6 +57,10 @@
 	border-inline-start: 4px solid #0288D1;
 }
 
+.site-mailer__renewal-notice {
+	border-inline-start: none;
+}
+
 .site-mailer__notice--pink {
 	padding-left: 54px;
 
@@ -106,4 +110,43 @@
 	color: #6D7882;
 	margin-top: 0;
 	margin-bottom: 12px;
+}
+
+/** Renewal notice styles **/
+
+.site-mailer__content-block {
+	display: flex;
+	gap: 15px;
+}
+
+.site-mailer__content-block .site-mailer__notice-content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+.site-mailer__renewal-notice-btn {
+	text-decoration: none;
+	padding: 4px 10px;
+	border-radius: 4px;
+	width: auto;
+}
+
+.site-mailer__notice--warning.site-mailer__renewal-notice .site-mailer__renewal-notice-btn {
+	color: #BB5B1D;
+	border: 1px solid #BB5B1D;
+}
+
+.site-mailer__notice--warning.site-mailer__renewal-notice .site-mailer__renewal-notice-btn:hover {
+	background: rgba(187, 91, 29, 0.08);
+}
+
+.site-mailer__notice--error.site-mailer__renewal-notice .site-mailer__renewal-notice-btn {
+	color: #DC2626;
+	border: 1px solid #DC2626;
+}
+
+.site-mailer__notice--error.site-mailer__renewal-notice .site-mailer__renewal-notice-btn:hover {
+	background-color: rgba(220, 38, 38, 0.08);
 }
