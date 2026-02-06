@@ -3,7 +3,9 @@
 namespace SiteMailer\Modules\Core;
 
 use SiteMailer\Classes\Module_Base;
+use SiteMailer\Classes\Utils;
 use SiteMailer\Modules\Connect\Module as Connect;
+use SiteMailer\Modules\Settings\Module as Settings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -37,13 +39,17 @@ class Module extends Module_Base {
 			),
 		];
 
-		if ( Connect::is_connected() ) {
+		if ( Connect::is_connected() && ! Settings::is_elementor_one() ) {
+
+			$upgrade_link = Utils::get_upgrade_link( 'https://go.elementor.com/sm-panel-wp-dash-upgrade-plugins/' );
+
 			$custom_links['upgrade'] = sprintf(
 				'<a href="%s" style="color: #524CFF; font-weight: 700;" target="_blank" rel="noopener noreferrer">%s</a>',
-				'https://go.elementor.com/sm-panel-wp-dash-upgrade-plugins/',
+				$upgrade_link,
 				esc_html__( 'Upgrade', 'site-mailer' )
 			);
-		} else {
+		}
+		if ( ! Connect::is_connected() ) {
 			$custom_links['connect'] = sprintf(
 				'<a href="%s" style="color: #524CFF; font-weight: 700;">%s</a>',
 				admin_url( 'admin.php?page=' . \SiteMailer\Modules\Settings\Module::SETTING_BASE_SLUG ),

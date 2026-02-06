@@ -22,11 +22,14 @@ class Settings {
 	public const FROM_NAME = 'site_mailer_from_name';
 	public const REPLY_TO_EMAIL = 'site_mailer_reply_to_email';
 	public const PLAN_SCOPE = 'site_mailer_plan_scope';
+	public const SUBSCRIPTION_ID = 'site_mailer_subscription_id';
+	public const CLIENT_ID = 'site_mailer_client_id';
 
 	/**
 	 * Returns plugin settings data by option name typecasted to an appropriate data type.
 	 *
 	 * @param string $option_name
+	 *
 	 * @return mixed
 	 */
 	public static function get( string $option_name ) {
@@ -47,12 +50,12 @@ class Settings {
 			case self::PLAN_DATA:
 				if ( ! $data ) {
 					return [
-						'plan'   => [
+						'plan' => [
 							'quota' => [
 								'allowed' => 0,
-								'used'    => 0,
+								'used' => 0,
 							],
-							'name'  => 'None',
+							'name' => 'None',
 						],
 						'sender' => [
 							'sender_in_used' => '',
@@ -82,7 +85,7 @@ class Settings {
 	 *
 	 * @return bool
 	 */
-	public static function set( string $option_name, $value ) : bool {
+	public static function set( string $option_name, $value ): bool {
 		return update_option( $option_name, $value, false );
 	}
 }

@@ -2,29 +2,25 @@ import Box from '@elementor/ui/Box';
 import Popover from '@elementor/ui/Popover';
 import Typography from '@elementor/ui/Typography';
 import { styled } from '@elementor/ui/styles';
-import { eventNames, mixpanelService, useStorage } from '@site-mailer/globals';
+import { eventNames, mixpanelService } from '@site-mailer/globals';
 import { useEffect, useRef } from '@wordpress/element';
-import { escapeHTML } from '@wordpress/escape-html';
 import { __ } from '@wordpress/i18n';
-import API from '../api';
 import DismissButton from '../components/dismiss-button';
 import FeedbackForm from '../components/feedback-form';
 import RatingForm from '../components/rating-form';
 import ReviewForm from '../components/review-form';
-import { useNotifications, useSettings } from '../hooks/use-settings';
+import { useSettings } from '../hooks/use-settings';
 
 const UserFeedbackForm = ( ) => {
 	const anchorEl = useRef( null );
 
-	const { success, error } = useNotifications();
-	const { save, get } = useStorage();
 	const {
-		rating,
 		setRating,
-		feedback,
 		isOpened,
-		setIsOpened,
+		currentPage,
 		setCurrentPage,
+		handleClose,
+		handleSubmit,
 		isRTL,
 		setIsRTL,
 	} = useSettings();
@@ -51,76 +47,12 @@ const UserFeedbackForm = ( ) => {
 		}
 	}, [ isOpened ] );
 
-	/**
-	 * Close the popover.
-	 * @param {Object} event
-	 * @param {string} reason
-	 */
-	const handleClose = ( event, reason ) => {
-		if ( 'backdropClick' !== reason ) {
-			setIsOpened( false );
-		}
-
-		mixpanelService.sendEvent( eventNames.review.dismissClicked );
-	};
-
 	const id = isOpened ? 'reviews-popover' : undefined;
-
-	const { currentPage } = useSettings();
 
 	const headerMessage = {
 		ratings: __( 'How would you rate Site Mailer so far?', 'site-mailer' ),
 		feedback: __( 'We’re thrilled to hear that! What would make it even better?', 'site-mailer' ),
-		review: __( "We're thrilled you're enjoying Site Mailer", 'site-mailer' ),
-	};
-
-	const handleSubmit = async ( close, avoidClosing = false ) => {
-		try {
-			const response = await API.sendFeedback( { rating, feedback } ).then( async ( res ) => {
-				await save( {
-					site_mailer_review_data: {
-						...get.data.site_mailer_review_data,
-						rating: parseInt( rating ),
-						feedback: escapeHTML( feedback ),
-						submitted: true,
-					},
-				} );
-
-				return res;
-			} );
-
-			if ( rating && ! feedback ) {
-				mixpanelService.sendEvent( eventNames.review.starSelected, {
-					rating: parseInt( rating ),
-				} );
-			}
-
-			if ( feedback ) {
-				mixpanelService.sendEvent( eventNames.review.feedbackSubmitted, {
-					feedback_text: escapeHTML( feedback ),
-					rating: parseInt( rating ),
-				} );
-			}
-
-			if ( ! avoidClosing ) {
-				await close();
-			}
-
-			if ( ! response?.success ) {
-				/**
-				 * Show success message if the feedback was already submitted.
-				 */
-				await success( __( 'Feedback already submitted', 'site-mailer' ) );
-			} else {
-				await success( __( 'Thank you for your feedback!', 'site-mailer' ) );
-			}
-
-			return true;
-		} catch ( e ) {
-			error( __( 'Failed to submit!', 'site-mailer' ) );
-			console.log( e );
-			return false;
-		}
+		review: null,
 	};
 
 	return (
@@ -151,15 +83,22 @@ const UserFeedbackForm = ( ) => {
 					<Typography
 						variant="subtitle1"
 						color="text.primary"
+						marginTop={ 1 }
 					>
 						{ headerMessage?.[ currentPage ] }
 					</Typography>
-					<DismissButton close={ close } />
 				</Header>
-				{ 'ratings' === currentPage && <RatingForm close={ handleClose } handleSubmitForm={ handleSubmit } /> }
-				{ 'feedback' === currentPage && <FeedbackForm close={ handleClose } handleSubmitForm={ handleSubmit } /> }
-				{ 'review' === currentPage && <ReviewForm close={ handleClose } /> }
+				{ 'ratings' === currentPage && <RatingForm /> }
+				{ 'feedback' === currentPage && <FeedbackForm /> }
+				{ 'review' === currentPage && <ReviewForm /> }
 			</StyledBox>
+			<Footer currentPage={ currentPage }>
+				<DismissButton
+					variant="button"
+					close={ handleClose }
+					handleSubmit={ handleSubmit }
+				/>
+			</Footer>
 		</Popover>
 	);
 };
@@ -177,4 +116,16 @@ const Header = styled( Box )`
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: ${ ( { theme } ) => theme.spacing( 2 ) };
+`;
+
+const Footer = styled( Box, {
+	shouldForwardProp: ( prop ) => prop !== 'currentPage',
+} )`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	${ ( { currentPage, theme } ) =>
+		currentPage !== 'feedback' &&
+		`border-top: 1px solid ${ theme.palette.divider };` }
 `;

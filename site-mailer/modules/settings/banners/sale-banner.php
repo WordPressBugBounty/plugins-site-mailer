@@ -13,16 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Sale_Banner
  */
 class Sale_Banner {
-	const BANNER_POINTER_NAME = 'site_mailer_sale_bf_2024_banner';
+	const BANNER_POINTER_NAME = 'site_mailer_sale_bf_2025_banner';
 	const POINTER_ACTION = 'site_mailer_pointer_dismissed';
 	const POINTER_NONCE_KEY = 'site-mailer-pointer-dismissed';
 
 	public static function is_sale_time(): bool {
-		$sale_start_time = gmmktime( 13, 0, 0, 11, 26, 2024 );
-		$sale_end_time = gmmktime( 9, 59, 0, 12, 4, 2024 );
+		$sale_start_time = strtotime( '2025-11-25 13:00:00 UTC' );
+		$sale_end_time = strtotime( '2025-12-04 04:59:00 UTC' );
 
-		$now_time = gmdate( 'U' );
-
+		$now_time = current_time( 'timestamp', true );
+		
 		return $now_time >= $sale_start_time && $now_time <= $sale_end_time;
 	}
 
@@ -38,7 +38,7 @@ class Sale_Banner {
 		if ( ! self::is_sale_time() || self::user_viewed_banner() ) {
 			return;
 		}
-		$img = plugins_url( '/images/bf-banner-sm-2024.jpg', __FILE__ );
+		$img = plugins_url( '/images/bf-banner-sm-2025.png', __FILE__ );
 		$url = admin_url( 'admin-ajax.php' );
 		$nonce = wp_create_nonce( self::POINTER_NONCE_KEY );
 
@@ -47,13 +47,13 @@ class Sale_Banner {
 			<div class="elementor-black-friday-banner-container">
 				<img src="<?php echo esc_url( $img ); ?>" alt="Black Friday banner image">
 				<a href="<?php echo esc_url( $link ); ?>" target="_blank">
-					Claim discount
+					Get discount
 				</a>
 				<button>
 					<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path fill-rule="evenodd" clip-rule="evenodd"
 							  d="M13.2803 1.28033C13.5732 0.987437 13.5732 0.512563 13.2803 0.21967C12.9874 -0.0732233 12.5126 -0.0732233 12.2197 0.21967L6.75 5.68934L1.28033 0.21967C0.987437 -0.0732233 0.512563 -0.0732233 0.21967 0.21967C-0.0732233 0.512563 -0.0732233 0.987437 0.21967 1.28033L5.68934 6.75L0.21967 12.2197C-0.0732233 12.5126 -0.0732233 12.9874 0.21967 13.2803C0.512563 13.5732 0.987437 13.5732 1.28033 13.2803L6.75 7.81066L12.2197 13.2803C12.5126 13.5732 12.9874 13.5732 13.2803 13.2803C13.5732 12.9874 13.5732 12.5126 13.2803 12.2197L7.81066 6.75L13.2803 1.28033Z"
-							  fill="white"/>
+							  fill="#fff"/>
 					</svg>
 				</button>
 			</div>
@@ -67,7 +67,7 @@ class Sale_Banner {
 
 			.elementor-black-friday-banner-container {
 				position: relative;
-				max-width: 1200px;
+				max-width: 1600px;
 				margin: 0 auto;
 				display: flex;
 				justify-content: end;
@@ -90,7 +90,7 @@ class Sale_Banner {
 				padding: 12px 24px;
 				font-size: 18px;
 				color: #000;
-				background-color: #FF7BE5;
+				background-color: #ff7be5;
 				text-decoration: none;
 				z-index: 2;
 			}

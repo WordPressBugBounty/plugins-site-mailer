@@ -4,6 +4,7 @@ namespace SiteMailer\Modules\Core\Components;
 
 use SiteMailer\Classes\Utils;
 use SiteMailer\Modules\Connect\Module as Connect;
+use SiteMailer\Modules\Settings\Module as Settings_Module;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -66,7 +67,7 @@ class Quota_Exhausted_Banner {
 				<?php echo esc_html( $message ); ?>
 			</p>
 			<a style="display: inline-block;background:#93003f;padding: 5px 16px;border-radius: 3px;color: #fff; text-decoration:none;"
-			href="https://go.elementor.com/sm-trialend-notice/">
+			href="<?php echo esc_url( Utils::get_upgrade_link( 'https://go.elementor.com/sm-trialend-notice/' ) ); ?>">
 				<?php esc_html_e(
 					'Upgrade Now',
 					'site-mailer'
@@ -143,6 +144,11 @@ class Quota_Exhausted_Banner {
 				return;
 			}
 
+            // Don't load for One
+            if (Settings_Module::is_elementor_one()) {
+                return;
+            }
+            
 			if ( is_admin() ) {
 				add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 				add_action( 'admin_notices', [ $this, 'render_not_connected_notice' ] );

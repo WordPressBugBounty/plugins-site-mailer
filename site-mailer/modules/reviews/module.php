@@ -44,8 +44,8 @@ class Module extends Module_Base {
 	/**
 	 * Enqueue Scripts and Styles
 	 */
-	public function enqueue_scripts( $hook ): void {
-		if ( 'settings_page_site-mailer-settings' !== $hook ) {
+	public function enqueue_scripts(): void {
+		if ( ! Utils::is_plugin_page() ) {
 			return;
 		}
 
@@ -53,7 +53,7 @@ class Module extends Module_Base {
 			return;
 		}
 
-		Utils\Assets::enqueue_app_assets( 'reviews' );
+		Utils\Assets::enqueue_app_assets( 'reviews', false );
 
 		wp_localize_script(
 			'reviews',
@@ -201,10 +201,43 @@ class Module extends Module_Base {
 		return false;
 	}
 
+	/**
+	 * Add review link to plugin row meta
+	 *
+	 * @param array $links
+	 * @param string $file
+	 * @return array
+	 * 
+	 */
+	public function add_plugin_row_meta( $links, $file ) {
+
+		if ( ! defined( 'SITE_MAILER_FILE' ) || plugin_basename(SITE_MAILER_FILE) !== $file ) {
+			return $links;
+		}
+
+		$links[] = '<a class="site-mailer-review" 
+						href="https://wordpress.org/support/plugin/site-mailer/reviews/#new-post"
+						target="_blank" rel="noopener noreferrer" 
+						title="' . esc_attr__( 'Rate our plugin', 'site-mailer' ) 
+					. '">
+							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+					</a>';
+
+		echo '<style>
+				.site-mailer-review{ display: inline-flex;flex-direction: row-reverse;} 
+				.site-mailer-review span{ color:#888}
+				.site-mailer-review span:hover{color:#ffa400}
+				.site-mailer-review span:hover~span{color:#ffa400}
+			</style>';
+
+		return $links;
+	}
+
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'admin_init', [ $this, 'register_base_data' ] );
 		add_action( 'rest_api_init', [ $this, 'register_settings' ] );
+		add_filter( 'plugin_row_meta', [ $this, 'add_plugin_row_meta' ], 10, 2 );
 
 		$this->register_routes();
 	}

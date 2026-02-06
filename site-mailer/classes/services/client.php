@@ -2,9 +2,6 @@
 
 namespace SiteMailer\Classes\Services;
 
-use SiteMailer\Modules\Connect\Classes\Data;
-use SiteMailer\Modules\Connect\Classes\Exceptions\Service_Exception;
-use SiteMailer\Modules\Connect\Classes\Service;
 use SiteMailer\Modules\Connect\Module as Connect;
 use WP_Error;
 
@@ -69,7 +66,7 @@ class Client {
 	 * @return string
 	 */
 	private static function build_logs_endpoint(): string {
-		$blog_id            = get_current_blog_id();
+		$blog_id = get_current_blog_id();
 		return get_rest_url( $blog_id, 'site-mailer/v1/webhooks/update-log' );
 	}
 
@@ -124,7 +121,7 @@ class Client {
 
 	public function add_bearer_token( $headers ) {
 		if ( $this->is_connected() ) {
-			$headers['Authorization'] = 'Bearer ' . Data::get_access_token();
+			$headers['Authorization'] = 'Bearer ' . Connect::get_connect()->data()->get_access_token();
 		}
 		return $headers;
 	}
@@ -183,7 +180,7 @@ class Client {
 
 		// If the token is invalid, refresh it and try again once only.
 		if ( ! $this->refreshed && ! empty( $body->message ) && ( false !== strpos( $body->message, 'Invalid Token' ) ) ) {
-			Service::refresh_token();
+			Connect::get_connect()->service()->renew_access_token();
 			$this->refreshed = true;
 			$args['headers'] = $this->add_bearer_token( $args['headers'] );
 			return $this->request( $method, $endpoint, $args );
@@ -191,7 +188,7 @@ class Client {
 
 		// If there is mismatch then trigger the mismatch flow explicitly.
 		if ( ! $this->refreshed && ! empty( $body->message ) && ( false !== strpos( $body->message, 'site url mismatch' ) ) ) {
-			Data::set_home_url( 'https://wrongurl' );
+			Connect::get_connect()->data()->set_home_url( 'https://wrongurl' );
 			return new WP_Error( 401, 'site url mismatch' );
 		}
 

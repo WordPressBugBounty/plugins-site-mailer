@@ -3,9 +3,7 @@
 namespace SiteMailer\Modules\Settings\Banners;
 
 use SiteMailer\Modules\Core\Components\Pointers;
-use SiteMailer\Modules\Logs\Database\Log_Entry;
 use SiteMailer\Modules\Logs\Database\Logs_Table;
-use SiteMailer\Modules\Connect\Classes\Data;
 use SiteMailer\Modules\Settings\Classes\PLG_Form_Detector;
 use SiteMailer\Modules\Settings\Classes\Settings;
 
@@ -24,6 +22,7 @@ class PLG_Banner
     /**
      * Shared URLs and configuration
      */
+    const DISABLE_PLG_BANNERS = true;
     const INSTALL_PLUGIN_SLUG = 'send-app';
     const LEARN_MORE_URL = 'https://go.elementor.com/sm-plg-send-banner/';
     const MIN_EMAILS_DEFAULT = 50;
@@ -69,6 +68,10 @@ class PLG_Banner
 
     private static function resolve_visible_type(): ?string
     {
+        if (self::DISABLE_PLG_BANNERS) {
+            return null;
+        }
+
         foreach (self::TYPE_PRIORITY as $candidate) {
             if (self::passes_conditions($candidate) && !self::user_viewed_plg_banner($candidate)) {
                 return $candidate;
@@ -231,14 +234,14 @@ class PLG_Banner
         <style>
             .site-mailer-plg-banner {
                 margin: 24px 24px 24px 6px;
-                background-color: rgb(255, 255, 255);
-                color: rgb(12, 13, 14);
+                background-color: #fff;
+                color: #0c0d0e;
                 position: relative;
                 margin-bottom: 40px;
                 transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
                 border-width: 1px;
                 border-style: solid;
-                border-color: #3B82F6;
+                border-color: #3b82f6;
                 border-image: initial;
                 border-radius: 4px;
                 overflow: hidden;
@@ -278,7 +281,7 @@ class PLG_Banner
             .plg-banner-text p {
                 margin: 0;
                 font-size: 14px;
-                color: #6B7280;
+                color: #6b7280;
                 line-height: 1.4;
             }
 
@@ -290,10 +293,10 @@ class PLG_Banner
             }
 
             .plg-banner-button {
-                border: 1px solid #3B82F6;
+                border: 1px solid #3b82f6;
                 padding: 5px 10px;
                 text-decoration: none;
-                color: #3B82F6;
+                color: #3b82f6;
                 display: inline-block;
                 margin: 10px 10px 0 0;
                 border-radius: 5px;
@@ -301,7 +304,7 @@ class PLG_Banner
 
             .plg-banner-button-install,
             .plg-banner-button-install:hover {
-                background-color: #3B82F6;
+                background-color: #3b82f6;
                 color: #fff;
             }
 
@@ -317,7 +320,7 @@ class PLG_Banner
             }
 
             .plg-dismiss-button:hover {
-                background: #F3F4F6;
+                background: #f3f4f6;
             }
 
             .plg-dismiss-button svg {

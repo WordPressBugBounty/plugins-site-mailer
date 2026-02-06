@@ -12,7 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Config {
 	const APP_NAME = 'site-mailer';
 	const APP_PREFIX = 'site_mailer';
-	const APP_REST_NAMESPACE = 'site_mailer';
+	const APP_REST_NAMESPACE = 'site-mailer/v1';
+	const PLUGIN_SLUG = 'site-mailer';
 	const BASE_URL = 'https://my.elementor.com/connect';
 	const ADMIN_PAGE = 'site-mailer-settings';
 	const APP_TYPE = 'app_mailer';

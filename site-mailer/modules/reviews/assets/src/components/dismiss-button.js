@@ -1,11 +1,14 @@
+import Box from '@elementor/ui/Box';
+import Button from '@elementor/ui/Button';
 import CloseButton from '@elementor/ui/CloseButton';
 import { useStorage } from '@site-mailer/globals';
 import { date } from '@wordpress/date';
+import { __ } from '@wordpress/i18n';
 import { useSettings } from '../hooks/use-settings';
 
-const DimissButton = () => {
+const DimissButton = ( { variant = 'icon' } ) => {
 	const { save, get } = useStorage();
-	const { setIsOpened } = useSettings();
+	const { currentPage, setIsOpened, handleClose, handleSubmit } = useSettings();
 	const handleDismiss = async () => {
 		if ( get.hasFinishedResolution ) {
 			await save( {
@@ -20,7 +23,45 @@ const DimissButton = () => {
 
 		setIsOpened( false );
 	};
-	return (	<CloseButton onClick={ handleDismiss } /> );
+
+	if ( 'icon' === variant ) {
+		return <CloseButton onClick={ handleDismiss } />;
+	}
+
+	if ( 'button' === variant ) {
+		return (
+			<Box
+				display="flex"
+				flexDirection="row"
+				gap={ 1 }
+				p={ currentPage === 'feedback' ? 2 : 0 }
+				pt={ currentPage === 'feedback' ? 0 : 'inherit' }
+				width="100%"
+				justifyContent="end"
+			>
+				<Button
+					color="secondary"
+					variant="text"
+					fullWidth={ currentPage === 'feedback' ? false : true }
+					sx={ { p: currentPage === 'feedback' ? 0.5 : 2 } }
+					onClick={ handleDismiss }
+					size="small"
+				>
+					{ __( 'Not now', 'site-mailer' ) }
+				</Button>
+				{ currentPage === 'feedback' && (
+					<Button
+						color="secondary"
+						variant="contained"
+						onClick={ () => handleSubmit( handleClose ) }
+						size="small"
+					>
+						{ __( 'Submit', 'site-mailer' ) }
+					</Button>
+				) }
+			</Box>
+		);
+	}
 };
 
 export default DimissButton;

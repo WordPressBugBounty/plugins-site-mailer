@@ -2,10 +2,10 @@
 
 **Contributors:** elemntor \
 **Tags:** email, email log, SMTP, email API, sender \
-**Requires at least:** 6.3 \
-**Tested up to:** 6.8 \
+**Requires at least:** 6.6 \
+**Tested up to:** 6.9 \
 **Requires PHP:** 7.4 \
-**Stable tag:** 1.2.7 \
+**Stable tag:** 1.4.0 \
 **License:** GPL-3 \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -63,7 +63,7 @@ Did an email fail to deliver? Easily resend it with a single click to ensure you
 
 Enable easy unsubscribe options for your emails. Track and manage all unsubscribed recipients directly in the Suppressions tab.
 
- == Benefits ==
+== Benefits ==
 
 * **No Integration Needed**: Use Site Mailer without the need for additional plugins or integrations.
 * **Troubleshooting**: Efficiently troubleshoot and resend emails when necessary.
@@ -148,6 +148,29 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 
 ## Changelog
+
+### 1.4.0 - 2026-01-20
+
+* Tweak: Moved the plugin entry point under a unified Elementor menu
+* Tweak: Redesigned the plugin settings interface for a unified look and feel
+* Tweak: Added support for "Elementor One"
+* Fix: Corrected the direct upgrade link to include the specific subscription ID
+
+### 1.3.0 - 2025-11-04
+
+* Tweak: Improved the Reviews component flow
+* Fix: Resolved toast review notification issue
+
+### 1.2.9 - 2025-09-16
+
+* New: Subscription renewal notice
+* Fix: Corrected misleading trial quota renewal notice
+
+### 1.2.8 - 2025-08-19
+
+* New: Bulk resend emails
+* Tweak: Added feedback questionnaire shown during plugin deactivation
+* Tweak: Ensured compatibility with PHP version 8.4
 
 ### 1.2.7 - 2025-06-16
 
@@ -241,4 +264,3 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 ### 0.0.1- 2024-09-16
 
 * Initial release
-
