@@ -2,6 +2,7 @@ import mixpanel from 'mixpanel-browser';
 
 const SHARE_USAGE_DATA = 'share_usage_data';
 const MIXPANEL_TOKEN = '150605b3b9f979922f2ac5a52e2dcfe9';
+const MIXPANEL_HOST = 'https://api-eu.mixpanel.com';
 
 const init = async () => {
 	const { siteMailerSettingsData } = window;
@@ -12,6 +13,7 @@ const init = async () => {
 	}
 
 	await mixpanel.init( MIXPANEL_TOKEN, {
+		api_host: MIXPANEL_HOST,
 		debug: siteMailerSettingsData.pluginEnv === 'dev',
 		track_pageview: false,
 		persistence: 'localStorage',

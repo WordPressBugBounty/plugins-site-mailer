@@ -23,6 +23,7 @@ class Module extends Module_Base {
 			'Not_Connected',
 			'Quota_Exhausted_Banner',
 			'Renewal_Notice',
+			'Notificator',
 		];
 	}
 

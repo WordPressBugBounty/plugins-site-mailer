@@ -10,7 +10,7 @@ use SiteMailer\Classes\Utils;
 use SiteMailer\Modules\Connect\Classes\Config;
 use SiteMailer\Modules\Connect\Module as Connect;
 use SiteMailer\Modules\Logs\Components\Log_Pull;
-use SiteMailer\Modules\Settings\Banners\Birthday_Banner;
+use SiteMailer\Modules\Settings\Banners\Elementor_Birthday_Banner;
 use SiteMailer\Modules\Settings\Banners\Sale_Banner;
 use SiteMailer\Modules\Settings\Classes\Settings;
 use SiteMailer\Modules\Settings\Module as SettingsModule;
@@ -56,7 +56,7 @@ class Module extends Module_Base {
     public function render_app() {
         ?>
         <?php Sale_Banner::get_banner( 'https://go.elementor.com/SM-BF-sale' ); ?>
-        <?php Birthday_Banner::get_banner( 'https://go.elementor.com/sm-b-day-banner' ); ?>
+        <?php Elementor_Birthday_Banner::get_banner( 'https://go.elementor.com/SM-10th-bd-sale' ); ?>
 
         <!-- The hack required to wrap WP notifications -->
         <div class="wrap">
