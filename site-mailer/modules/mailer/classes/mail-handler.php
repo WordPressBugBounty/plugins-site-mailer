@@ -87,19 +87,19 @@ class Mail_Handler {
 		$msg = '<!doctype html>
 				<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
 					<head>
-						<title>' . __( 'Site Mailer Email Test', 'site-mailer' ) . '</title>
+						<title>' . __( 'Email Deliverability Email Test', 'site-mailer' ) . '</title>
 					</head>
 					<body>
 						<p style="padding: 4px 0">' . __( 'Congrats, the test email was sent successfully!', 'site-mailer' ) . '</p>
-						<p style="padding: 4px 0">' . __( 'Thank you for using Site Mailer. We are here to make sure your emails actually get delivered!', 'site-mailer' ) . '</p>
-						<p style="padding: 12px 0">' . __( 'The Site Mailer Team', 'site-mailer' ) . '</p>
+						<p style="padding: 4px 0">' . __( 'Thank you for using Email Deliverability. We are here to make sure your emails actually get delivered!', 'site-mailer' ) . '</p>
+						<p style="padding: 12px 0">' . __( 'The Email Deliverability Team', 'site-mailer' ) . '</p>
 						<p style="padding: 4px 0">' . __( 'Sent By:', 'site-mailer' ) . ' ' . $url . '</p>
 						<p style="padding: 4px 0">' . __( 'Timestamp:', 'site-mailer' ) . ' ' . $current_timestamp . '</p>
 					</body>
 				</html>';
 		$email = [
 			'to' => $address,
-			'subject' => __( 'Site Mailer Email Test', 'site-mailer' ),
+			'subject' => __( 'Email Deliverability Email Test', 'site-mailer' ),
 			'message' => $msg,
 			'headers' => 'Content-Type: text/html',
 		];

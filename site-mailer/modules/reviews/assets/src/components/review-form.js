@@ -54,7 +54,7 @@ const ReviewForm = () => {
 				color="secondary"
 				marginBottom={ 3 }
 				width="55%"
-			>{ __( 'Help others discover Site Mailer on WordPress', 'site-mailer' ) }
+			>{ __( 'Help others discover Email Deliverability on WordPress', 'site-mailer' ) }
 			</Typography>
 			<Rating
 				emptyIcon={ <StarFilledIcon fontSize="large" /> }

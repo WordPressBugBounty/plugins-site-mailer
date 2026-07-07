@@ -51,10 +51,10 @@ class Module extends Module_Base {
 		// Enqueue thickbox for modal
 		add_thickbox();
 
-		Utils\Assets::enqueue_app_assets( 'deactivation' );
+		Utils\Assets::enqueue_app_assets( 'deactivation-site-mailer' );
 
 		wp_localize_script(
-			'deactivation',
+			'deactivation-site-mailer',
 			'siteMailerDeactivationFeedback',
 			[
 				'nonce' => wp_create_nonce( 'site_mailer_deactivation_feedback' ),
@@ -75,7 +75,7 @@ class Module extends Module_Base {
 		<div id="site-mailer-deactivation-modal" class="site-mailer-deactivation-modal">
 			<div class="site-mailer-deactivation-content">
 				<h4>
-					<?php esc_html_e( 'If you have a moment, please share why you are deactivating Site Mailer:', 'site-mailer' ); ?>
+					<?php esc_html_e( 'If you have a moment, please share why you are deactivating Email Deliverability:', 'site-mailer' ); ?>
 				</h4>
 
 				<div class="site-mailer-feedback-options">

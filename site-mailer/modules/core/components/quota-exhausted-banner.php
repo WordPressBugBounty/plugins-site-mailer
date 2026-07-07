@@ -59,7 +59,7 @@ class Quota_Exhausted_Banner {
 			style="padding-bottom: 15px; padding-left: 32px;">
 			<p class="primary-heading">
 				<?php esc_html_e(
-					'Oh no! Site Mailer has reached the maximum email limit.',
+					'Email Deliverability has reached the maximum email limit.',
 					'site-mailer'
 				); ?>
 			</p>

@@ -43,7 +43,7 @@ class Renewal_Notice {
 	public function get_renewal_text(): array {
 		if ( $this->days_diff <= 30 && $this->days_diff > 0 ) {
 			return [
-				'title' => esc_html__( 'Site Mailer Subscription Ending Soon!', 'site-mailer' ),
+				'title' => esc_html__( 'Email Deliverability Subscription Ending Soon!', 'site-mailer' ),
 				'description' => esc_html__( 'Renew now to ensure your emails continue to reach inboxes without disruption.', 'site-mailer' ),
 				'btn' => esc_html__( 'Enable Auto-Renew', 'site-mailer' ),
 				'link' => esc_url( 'https://go.elementor.com/sm-renew-30' ),
@@ -52,7 +52,7 @@ class Renewal_Notice {
 		}
 		if ( $this->days_diff <= 0 && $this->days_diff > -7 ) {
 			return [
-				'title' => esc_html__( 'Your Site Mailer Subscription Has Expired', 'site-mailer' ),
+				'title' => esc_html__( 'Your Email Deliverability Subscription Has Expired', 'site-mailer' ),
 				'description' => esc_html__( 'Email delivery is paused. Renew now to resume reliable delivery without interruption.', 'site-mailer' ),
 				'btn' => esc_html__( 'Renew Now', 'site-mailer' ),
 				'link' => esc_url( 'https://go.elementor.com/sm-renew-expire' ),
@@ -60,7 +60,7 @@ class Renewal_Notice {
 			];
 		}
 		return [
-			'title' => esc_html__( 'It’s Not Too Late! Renew Site Mailer', 'site-mailer' ),
+			'title' => esc_html__( 'It’s Not Too Late! Renew Email Deliverability', 'site-mailer' ),
 			'description' => esc_html__( 'Reactivate your subscription to resume reliable delivery and keep your emails reaching inboxes.', 'site-mailer' ),
 			'btn' => esc_html__( 'Resume sending', 'site-mailer' ),
 			'link' => esc_url( 'https://go.elementor.com/sm-renew-post-expire' ),

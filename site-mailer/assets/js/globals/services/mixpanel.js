@@ -2,6 +2,8 @@ import mixpanel from 'mixpanel-browser';
 
 const SHARE_USAGE_DATA = 'share_usage_data';
 const MIXPANEL_TOKEN = '150605b3b9f979922f2ac5a52e2dcfe9';
+const MIXPANEL_HOST = 'https://api-eu.mixpanel.com';
+const APP_INSTANCE_KEY = 'app_mailer';
 
 const init = async () => {
 	const { siteMailerSettingsData } = window;
@@ -12,13 +14,15 @@ const init = async () => {
 	}
 
 	await mixpanel.init( MIXPANEL_TOKEN, {
+		api_host: MIXPANEL_HOST,
 		debug: siteMailerSettingsData.pluginEnv === 'dev',
 		track_pageview: false,
 		persistence: 'localStorage',
+		persistence_name: APP_INSTANCE_KEY,
 	} );
 
 	mixpanel.register( {
-		productName: 'app_mailer',
+		productName: APP_INSTANCE_KEY,
 		appType: 'Apps',
 		environment: siteMailerSettingsData.pluginEnv,
 		is_trial: Boolean( plan?.features?.plan?.toLowerCase().includes( 'trial' ) ),

@@ -8,8 +8,7 @@
 
 #TB_window.site-mailer-feedback-thickbox {
 	height: auto !important;
-	max-height: 90vh;
-	overflow: auto;
+	overflow: visible;
 	top: 50% !important;
 	left: 50% !important;
 	transform: translate(-50%, -50%) !important;
@@ -21,13 +20,19 @@
 
 .site-mailer-feedback-thickbox #TB_ajaxContent {
 	overflow: visible;
+	height: auto !important;
 	padding: 0;
+}
+
+.site-mailer-deactivation-content > h4 {
+	margin-top: 0;
 }
 
 .site-mailer-feedback-thickbox #TB_title {
 	padding: 5px;
 	display: flex;
 	flex-direction: row;
+	border-radius: 8px 8px 0 0;
 }
 
 .site-mailer-feedback-thickbox #TB_closeWindowButton .tb-close-icon {

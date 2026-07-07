@@ -2,7 +2,8 @@ import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
 import APIError from './exceptions/APIError';
 
-const wpV2Prefix = '/wp/v2';
+export const wpV2Prefix = '/wp/v2';
+export const elementorOneV1Prefix = '/elementor-one/v1';
 
 class APIBase {
 	static async request( { path, data, method = 'POST' } ) {
@@ -17,7 +18,7 @@ class APIBase {
 				data,
 			} );
 
-			if ( path.startsWith( wpV2Prefix ) ) {
+			if ( path.startsWith( wpV2Prefix ) || path.startsWith( elementorOneV1Prefix ) ) {
 				return response;
 			}
 

@@ -24,6 +24,7 @@ class Settings {
 	public const PLAN_SCOPE = 'site_mailer_plan_scope';
 	public const SUBSCRIPTION_ID = 'site_mailer_subscription_id';
 	public const CLIENT_ID = 'site_mailer_client_id';
+	public const IS_MIGRATION_POPUP_DISMISSED = 'site_mailer_is_migration_popup_dismissed';
 
 	/**
 	 * Returns plugin settings data by option name typecasted to an appropriate data type.
@@ -67,7 +68,7 @@ class Settings {
 				return $data;
 			case self::FROM_NAME:
 				if ( ! $data ) {
-					return 'Site Mailer';
+					return 'Email Deliverability';
 				}
 
 				return $data;

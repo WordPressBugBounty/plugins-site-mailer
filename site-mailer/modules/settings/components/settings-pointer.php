@@ -28,8 +28,8 @@ class Settings_Pointer {
         wp_enqueue_script( 'wp-pointer' );
         wp_enqueue_style( 'wp-pointer' );
 
-        $pointer_content = '<h3>' . esc_html__( 'Site Mailer', 'site-mailer' ) . '</h3>';
-        $pointer_content .= '<p>' . esc_html__( 'Go to Site Mailer to send test email and set your domain', 'site-mailer' ) . '</p>';
+        $pointer_content = '<h3>' . esc_html__( 'Email Deliverability', 'site-mailer' ) . '</h3>';
+        $pointer_content .= '<p>' . esc_html__( 'Go to Email Deliverability to send test email and set your domain', 'site-mailer' ) . '</p>';
 
         $pointer_content .= sprintf(
                 '<p><a class="button button-primary site-mailer-pointer-settings-link" href="%s">%s</a></p>',

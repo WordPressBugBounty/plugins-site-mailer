@@ -13,7 +13,7 @@ const FeedbackForm = ( ) => {
 				onChange={ ( e ) => setFeedback( e.target.value ) }
 				minRows={ 5 }
 				multiline
-				placeholder={ __( 'Share your thoughts on how we can improve Site Mailer…', 'site-mailer' ) }
+				placeholder={ __( 'Share your thoughts on how we can improve Email Deliverability…', 'site-mailer' ) }
 				value={ feedback }
 				color="secondary"
 			/>

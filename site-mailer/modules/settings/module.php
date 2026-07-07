@@ -272,27 +272,27 @@ class Module extends Module_Base {
                 ],
                 'close_post_connect_modal' => [
                         'type' => 'boolean',
-                        'description' => _x( 'Site Mailer Close Post Connect Modal', 'Description for API usage. no need to translate', 'site-mailer' ),
+                        'description' => _x( 'Email Deliverability Close Post Connect Modal', 'Description for API usage. no need to translate', 'site-mailer' ),
                 ],
                 'from_name' => [
                         'type' => 'string',
-                        'description' => _x( 'Site Mailer From Email', 'Description for API usage. no need to translate', 'site-mailer' ),
+                        'description' => _x( 'Email Deliverability From Email', 'Description for API usage. no need to translate', 'site-mailer' ),
                 ],
                 'reply_to_email' => [
                         'type' => 'string',
-                        'description' => _x( 'Site Mailer Reply Email', 'Description for API usage. no need to translate', 'site-mailer' ),
+                        'description' => _x( 'Email Deliverability Reply Email', 'Description for API usage. no need to translate', 'site-mailer' ),
                 ],
                 'sender_domain' => [
                         'type' => 'string',
-                        'description' => _x( 'Site Mailer Sender Domain', 'Description for API usage. no need to translate', 'site-mailer' ),
+                        'description' => _x( 'Email Deliverability Sender Domain', 'Description for API usage. no need to translate', 'site-mailer' ),
                 ],
                 'sender_email_prefix' => [
                         'type' => 'string',
-                        'description' => _x( 'Site Mailer Sender Mail Prefix', 'Description for API usage. no need to translate', 'site-mailer' ),
+                        'description' => _x( 'Email Deliverability Sender Mail Prefix', 'Description for API usage. no need to translate', 'site-mailer' ),
                 ],
                 'custom_domain_dns_records' => [
                         'type' => 'string',
-                        'description' => _x( 'Site Mailer custom domain DNS records', 'Description for API usage. no need to translate', 'site-mailer' ),
+                        'description' => _x( 'Email Deliverability custom domain DNS records', 'Description for API usage. no need to translate', 'site-mailer' ),
                 ],
                 'verification_started' => [
                         'type' => 'boolean',
@@ -327,6 +327,10 @@ class Module extends Module_Base {
                 ],
                 'hide_walkthrough_modal' => [
                         'type' => 'boolean',
+                ],
+                'is_migration_popup_dismissed' => [
+                        'type' => 'boolean',
+                        'description' => _x( 'Site Mailer Migration Popup Dismissed', 'Description for API usage. no need to translate', 'site-mailer' ),
                 ],
         ];
 
@@ -460,11 +464,26 @@ class Module extends Module_Base {
     }
 
     /**
-     * Check if elementor one
+     * Check if site mailer is connected to elementor one
      * @return bool
      */
     public static function is_elementor_one(): bool {
         return Connect::get_connect()->get_config( 'app_type' ) !== Config::APP_TYPE;
+    }
+
+    /**
+     * Check if user generally has an active Elementor One subscription,
+     * regardless of whether Site Mailer itself is connected to One.
+     * @return bool
+     */
+    public static function has_elementor_one_subscription(): bool {
+        if ( ! class_exists( '\ElementorOne\Admin\Helpers\Utils' ) ) {
+            return false;
+        }
+
+        $one_facade = \ElementorOne\Admin\Helpers\Utils::get_one_connect();
+
+        return $one_facade && $one_facade->utils()->is_connected();
     }
 
     /**
@@ -498,6 +517,8 @@ class Module extends Module_Base {
                 'isRTL' => is_rtl(),
                 'lastLogRefresh' => Log_Pull::check_refresh_time(),
                 'isElementorOne' => self::is_elementor_one(),
+                'hasElementorOneSubscription' => self::has_elementor_one_subscription(),
+                'isMigrationPopupDismissed' => (bool) Settings::get( Settings::IS_MIGRATION_POPUP_DISMISSED ),
         ];
     }
 

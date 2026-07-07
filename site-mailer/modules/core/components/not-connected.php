@@ -34,7 +34,7 @@ class Not_Connected {
             <p>
                 <b>
                     <?php esc_html_e(
-                            'Site Mailer is not connected right now. Connect your account to ensure your site reliably sends emails.',
+                            'Email Deliverability is not connected right now. Connect your account to ensure your site reliably sends emails.',
                             'site-mailer'
                     ); ?>
                 </b>

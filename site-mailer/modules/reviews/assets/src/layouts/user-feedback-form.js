@@ -50,7 +50,7 @@ const UserFeedbackForm = ( ) => {
 	const id = isOpened ? 'reviews-popover' : undefined;
 
 	const headerMessage = {
-		ratings: __( 'How would you rate Site Mailer so far?', 'site-mailer' ),
+		ratings: __( 'How would you rate Email Deliverability so far?', 'site-mailer' ),
 		feedback: __( 'We’re thrilled to hear that! What would make it even better?', 'site-mailer' ),
 		review: null,
 	};

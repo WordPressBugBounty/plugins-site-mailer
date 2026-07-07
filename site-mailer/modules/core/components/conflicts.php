@@ -26,7 +26,7 @@ class Conflicts {
 			<p>
 				<b>
 					<?php esc_html_e(
-						'Site Mailer has detected multiple active SMTP plugins.',
+						'Email Deliverability has detected multiple active SMTP plugins.',
 						'site-mailer'
 					); ?>
 				</b>
