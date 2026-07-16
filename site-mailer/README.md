@@ -5,7 +5,7 @@
 **Requires at least:** 6.7 \
 **Tested up to:** 7.0 \
 **Requires PHP:** 7.4 \
-**Stable tag:** 1.4.5 \
+**Stable tag:** 1.4.7 \
 **License:** GPL-3 \
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -63,11 +63,11 @@ Did an email fail to deliver? Easily resend it with a single click to ensure you
 
 Enable easy unsubscribe options for your emails. Track and manage all unsubscribed recipients directly in the Suppressions tab.
 
-== Benefits ==
+ == Benefits ==
 
 * **No integration needed**: Use Email Deliverability without the need for additional plugins or integrations.
 * **Troubleshooting**: Efficiently troubleshoot and resend emails when necessary.
-* **Spam reduction**: Our plugin will keep your emails out of the spam folder, ensuring that your important messages reach their intended recipients.
+* **Spam reduction**: Our plugin will keeps your emails out of the spam folder, ensuring your important messages reach their intended recipients.
 * **Built by the Elementor team**: Leverage the trust and reliability of a solution developed by Elementor.
 
 ## Get started today
@@ -103,9 +103,9 @@ Absolutely! The Email Deliverability plugin is designed to be user-friendly, wit
 
 Using the PHP `mail()` function can cause issues with email deliverability and security. The Email Deliverability plugin offers several benefits:
 
-* Higher Deliverability: Emails are less likely to be marked as spam.
-* Enhanced Security: Uses secure authentication methods.
-* Logs and Monitoring: Provides detailed logs and monitoring for better email management.
+* Higher deliverability: Emails are less likely to be marked as spam.
+* Enhanced security: Uses secure authentication methods.
+* Logs and monitoring: Provides detailed logs and monitoring for better email management.
 * Overall, it ensures your transactional emails are sent reliably and professionally.
 
 ### Do you offer support?
@@ -140,6 +140,39 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 
 ## Changelog
+
+### 1.4.7 - 2026-07-16
+
+* Tweak: Harden security for suppressions screen.
+
+### 1.4.6 - 2026-07-01
+
+* Tweak: accessibility fix in deactivation modal.
+* Tweak: Assets renaming.
+
+### 1.4.5 - 2026-06-02
+
+* Tweak - Improved support for site URL different than home URL
+* Tweak - Improved Elementor One support
+
+### 1.4.4 - 2026-03-31
+
+* Tweak: Improved WPML support
+* Tweak: Implement internalization (i18n) best practice
+
+### 1.4.3 - 2026-02-17
+
+* Tweak: Enabled display of WordPress admin notices for better visibility
+* Fix: Resolved an issue where logs failed to update in specific Email Deliverability cases
+
+### 1.4.2 - 2026-01-28
+
+* Tweak: Security enhancements for access control
+
+### 1.4.1 - 2026-01-28
+
+* Fix: Resolved loading issues for settings on RTL websites
+* Fix: Resolved missing style loading warnings in reviews
 
 ### 1.4.0 - 2026-01-20
 

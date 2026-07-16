@@ -60,8 +60,8 @@ class Get_Suppressions extends Route_Base {
 
 			// Set order/default order
 			$order = $request_order_by && $request_order
-				? [ '`' . $request_order_by . '`' => $request_order ]
-				: [ Suppressions_Table::CREATED_AT => 'DESC' ];
+				? [ Suppressions_Table::table_name() . '.' . $request_order_by => $request_order ]
+				: [ Suppressions_Table::table_name() . '.' . Suppressions_Table::CREATED_AT => 'DESC' ];
 
 			$suppressions = Suppressions_Entry::get_suppressions(
 				'*',

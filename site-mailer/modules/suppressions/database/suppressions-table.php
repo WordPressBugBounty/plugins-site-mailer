@@ -24,6 +24,63 @@ class Suppressions_Table extends Table {
 
 	public static $table_name = 'site_mail_suppressions';
 
+	public static function is_order_by_valid( $order_by ): bool {
+		$is_valid_order_by = true;
+		$allowed_columns   = array_keys( self::get_columns() );
+
+		foreach ( $order_by as $column => $direction ) {
+			$raw_column = str_replace( self::table_name() . '.', '', $column );
+			$raw_column = trim( $raw_column, '`' );
+
+			if ( ! in_array( $raw_column, $allowed_columns, true ) ) {
+				return false;
+			}
+
+			$direction = strtoupper( trim( $direction ) );
+			if ( ! sanitize_sql_orderby( "{$raw_column} {$direction}" ) ) {
+				$is_valid_order_by = false;
+				break;
+			}
+		}
+
+		return $is_valid_order_by;
+	}
+
+	/**
+	 * build_sql_string
+	 *
+	 * Override base Table::build_sql_string to validate ORDER BY before concatenation.
+	 */
+	public static function build_sql_string( $fields = '*', $where = '1', ?int $limit = null, ?int $offset = null, string $join = '', array $order_by = [] ): string {
+		if ( is_array( $fields ) ) {
+			$fields = implode( ', ', $fields );
+		}
+
+		$db = static::db();
+		$query_string = 'SELECT %s FROM %s %s WHERE %s';
+		$query_string = sprintf(
+			$query_string,
+			$fields,
+			static::table_name(),
+			$join,
+			static::where( $where )
+		);
+
+		if ( $order_by && self::is_order_by_valid( $order_by ) ) {
+			$query_string .= static::build_order_by_sql_string( $order_by );
+		}
+
+		if ( $limit ) {
+			$query_string .= $db->prepare( ' LIMIT %d', $limit );
+		}
+
+		if ( $offset ) {
+			$query_string .= $db->prepare( ' OFFSET %d', $offset );
+		}
+
+		return $query_string;
+	}
+
 	public static function get_columns(): array {
 		return [
 			self::ID => [

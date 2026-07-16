@@ -3,7 +3,7 @@
  * Plugin Name: Email Deliverability - SMTP Replacement, Email API Deliverability & Email Log
  * Description: Effortlessly manage transactional emails with Email Deliverability. High deliverability, logs and statistics, and no SMTP plugins needed.
  * Plugin URI: https://elementor.com/
- * Version: 1.4.6
+ * Version: 1.4.7
  * Author: Elementor.com
  * Author URI: https://go.elementor.com/author-url-sm/
  * Text Domain: site-mailer
@@ -25,12 +25,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'SITE_MAILER_VERSION', '1.4.6' );
+define( 'SITE_MAILER_VERSION', '1.4.7' );
 define( 'SITE_MAILER_FILE', __FILE__ );
 define( 'SITE_MAILER_PATH', plugin_dir_path( SITE_MAILER_FILE ) );
 define( 'SITE_MAILER_URL', plugins_url( '/', SITE_MAILER_FILE ) );
-define( 'SITE_MAILER_ASSETS_PATH',  SITE_MAILER_PATH . 'assets/' );
-define( 'SITE_MAILER_ASSETS_URL',  SITE_MAILER_URL . 'assets/' );
+define( 'SITE_MAILER_ASSETS_PATH', SITE_MAILER_PATH . 'assets/' );
+define( 'SITE_MAILER_ASSETS_URL', SITE_MAILER_URL . 'assets/' );
 
 /**
  *  SiteMailer Class
