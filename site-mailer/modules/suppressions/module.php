@@ -23,7 +23,7 @@ class Module extends Module_Base {
 		return 'suppressions';
 	}
 
-	public static function routes_list() : array {
+	public static function routes_list(): array {
 		return [
 			'Unsubscribe',
 			'Get_Suppressions',

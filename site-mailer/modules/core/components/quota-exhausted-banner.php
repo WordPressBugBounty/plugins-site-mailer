@@ -40,23 +40,18 @@ class Quota_Exhausted_Banner {
 			return;
 		}
 
-		$message = esc_html__(
-			'No additional emails will be sent until the monthly quota renews, unless you upgrade your plan.',
-			'site-mailer'
-		);
+		$message = esc_html__( 'No additional emails will be sent until the monthly quota renews, unless you upgrade your plan.', 'site-mailer' );
 
 		// Switch message if the plan is not free trial
-		if ( $plan_data->plan->name !== 'Free Trial' ) {
-			$message = esc_html__(
-				'No additional emails will be sent, unless you upgrade your plan.',
-				'site-mailer'
-			);
+		if ( 'Free Trial' !== $plan_data->plan->name ) {
+			$message = esc_html__( 'No additional emails will be sent, unless you upgrade your plan.', 'site-mailer' );
 		}
 
 		?>
 		<div class="notice notice-error notice is-dismissible site-mailer__notice site-mailer__notice--error-custom"
-			 data-notice-slug="<?php echo esc_attr( self::QUOTA_EXHAUSTED_SLUG ); ?>"
-			style="padding-bottom: 15px; padding-left: 32px;">
+			data-notice-slug="<?php echo esc_attr( self::QUOTA_EXHAUSTED_SLUG ); ?>"
+			style="padding-bottom: 15px; padding-left: 32px;"
+		>
 			<p class="primary-heading">
 				<?php esc_html_e(
 					'Email Deliverability has reached the maximum email limit.',
@@ -144,11 +139,11 @@ class Quota_Exhausted_Banner {
 				return;
 			}
 
-            // Don't load for One
-            if (Settings_Module::is_elementor_one()) {
-                return;
-            }
-            
+			// Don't load for One
+			if ( Settings_Module::is_elementor_one() ) {
+				return;
+			}
+
 			if ( is_admin() ) {
 				add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 				add_action( 'admin_notices', [ $this, 'render_not_connected_notice' ] );

@@ -23,11 +23,11 @@ class Module extends Module_Base {
 		return 'webhooks';
 	}
 
-	public static function component_list() : array {
+	public static function component_list(): array {
 		return [];
 	}
 
-	public static function routes_list() : array {
+	public static function routes_list(): array {
 		return [
 			'Update_Log',
 		];

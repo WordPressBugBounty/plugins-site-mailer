@@ -20,6 +20,7 @@ class Settings {
 	public const IS_VALID_PLAN_DATA = 'site_mailer_is_valid_plan_data';
 	public const CUSTOM_DOMAIN_VERIFICATION_START_TIME = 'site_mailer_custom_domain_verification_start_time';
 	public const FROM_NAME = 'site_mailer_from_name';
+	public const DEFAULT_FROM_NAME = 'Site Mailer';
 	public const REPLY_TO_EMAIL = 'site_mailer_reply_to_email';
 	public const PLAN_SCOPE = 'site_mailer_plan_scope';
 	public const SUBSCRIPTION_ID = 'site_mailer_subscription_id';
@@ -68,7 +69,7 @@ class Settings {
 				return $data;
 			case self::FROM_NAME:
 				if ( ! $data ) {
-					return 'Email Deliverability';
+					return self::DEFAULT_FROM_NAME;
 				}
 
 				return $data;

@@ -37,11 +37,10 @@ class Utils {
 		return str_contains( $current_screen->id, 'options-' );
 	}
 
-	public static function get_upgrade_link( string $url ) : string {
+	public static function get_upgrade_link( string $url ): string {
 		if ( Settings::get( Settings::SUBSCRIPTION_ID ) ) {
 			return add_query_arg( 'subscription_id', Settings::get( Settings::SUBSCRIPTION_ID ), $url );
 		}
 		return $url;
 	}
-
 }

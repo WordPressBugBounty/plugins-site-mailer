@@ -31,7 +31,7 @@ class Module extends Module_Base {
 		return 'reviews';
 	}
 
-	public static function routes_list() : array {
+	public static function routes_list(): array {
 		return [
 			'Feedback',
 		];
@@ -207,18 +207,17 @@ class Module extends Module_Base {
 	 * @param array $links
 	 * @param string $file
 	 * @return array
-	 * 
 	 */
 	public function add_plugin_row_meta( $links, $file ) {
 
-		if ( ! defined( 'SITE_MAILER_FILE' ) || plugin_basename(SITE_MAILER_FILE) !== $file ) {
+		if ( ! defined( 'SITE_MAILER_FILE' ) || plugin_basename( SITE_MAILER_FILE ) !== $file ) {
 			return $links;
 		}
 
 		$links[] = '<a class="site-mailer-review" 
 						href="https://wordpress.org/support/plugin/site-mailer/reviews/#new-post"
 						target="_blank" rel="noopener noreferrer" 
-						title="' . esc_attr__( 'Rate our plugin', 'site-mailer' ) 
+						title="' . esc_attr__( 'Rate our plugin', 'site-mailer' )
 					. '">
 							<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 					</a>';

@@ -32,7 +32,7 @@ class Module extends Module_Base {
 	}
 
 
-	public static function routes_list() : array {
+	public static function routes_list(): array {
 		return [
 			'Get_Logs',
 			'Delete_Logs',

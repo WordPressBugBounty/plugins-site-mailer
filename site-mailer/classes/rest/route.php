@@ -393,5 +393,4 @@ abstract class Route {
 			]);
 		}
 	}
-
 }

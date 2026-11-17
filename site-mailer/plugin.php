@@ -86,7 +86,7 @@ class Plugin {
 	}
 
 	private function includes() {
-		require_once  SITE_MAILER_PATH . 'includes/modules-manager.php';
+		require_once SITE_MAILER_PATH . 'includes/modules-manager.php';
 		$this->modules_manager = new Manager();
 	}
 

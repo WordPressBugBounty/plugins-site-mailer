@@ -17,9 +17,9 @@ https://www.youtube.com/watch?v=1hOxkEO-22I
 
 Has your WordPress site stopped sending emails? Are emails from your WordPress site landing in spam or not getting delivered? Are customers complaining about missing messages?
 
-With **Email Deliverability** (formally known as Site Mailer), you can say goodbye to email issues. Our easy-to-use tool ensures all emails reach their destination while providing you with a detailed email log to track and resend messages if needed.
+With **Site Mailer** (formally known as Site Mailer), you can say goodbye to email issues. Our easy-to-use tool ensures all emails reach their destination while providing you with a detailed email log to track and resend messages if needed.
 
-**Enhance your email management effortlessly**. Email Deliverability eliminates the need for complex SMTP plugins, providing a streamlined solution for reliable email deliverability. Troubleshoot and monitor with ease using our intuitive interface, so you never miss another email.
+**Enhance your email management effortlessly**. Site Mailer eliminates the need for complex SMTP plugins, providing a streamlined solution for reliable email deliverability. Troubleshoot and monitor with ease using our intuitive interface, so you never miss another email.
 
 ## Key features
 
@@ -33,11 +33,11 @@ Send emails with your custom domain — or get started quickly with our default 
 
 ### No integration or SMTP plugin needed
 
-Email Deliverability works seamlessly without the need for additional API integration or SMTP plugins. This means less hassle and more efficient email management.
+Site Mailer works seamlessly without the need for additional API integration or SMTP plugins. This means less hassle and more efficient email management.
 
 ### Easy setup
 
-Get started with Email Deliverability in no time. Our intuitive setup process ensures you can configure and start using the plugin quickly and effortlessly.
+Get started with Site Mailer in no time. Our intuitive setup process ensures you can configure and start using the plugin quickly and effortlessly.
 
 ### 30-day log retention
 
@@ -45,7 +45,7 @@ The plugin includes 30 days of email log retention, allowing you to easily track
 
 ### Compatibility with popular plugins
 
-Email Deliverability has been tested to be fully compatible with most popular WordPress plugins, including Elementor Pro, WooCommerce, Contact Form 7, WPForms and more.
+Site Mailer has been tested to be fully compatible with most popular WordPress plugins, including Elementor Pro, WooCommerce, Contact Form 7, WPForms and more.
 
 ### Reputation management
 
@@ -65,16 +65,16 @@ Enable easy unsubscribe options for your emails. Track and manage all unsubscrib
 
  == Benefits ==
 
-* **No integration needed**: Use Email Deliverability without the need for additional plugins or integrations.
+* **No integration needed**: Use Site Mailer without the need for additional plugins or integrations.
 * **Troubleshooting**: Efficiently troubleshoot and resend emails when necessary.
 * **Spam reduction**: Our plugin will keeps your emails out of the spam folder, ensuring your important messages reach their intended recipients.
 * **Built by the Elementor team**: Leverage the trust and reliability of a solution developed by Elementor.
 
 ## Get started today
 
-**Transform your website’s email management with Email Deliverability!**
+**Transform your website’s email management with Site Mailer!**
 
-For more information about Email Deliverability, visit our [official website](https://go.elementor.com/wp-repo-wp-dash-sm-product-page/).
+For more information about Site Mailer, visit our [official website](https://go.elementor.com/wp-repo-wp-dash-sm-product-page/).
 If you have any questions or need support, feel free to [contact us](https://go.elementor.com/wp-repo-wp-dash-sm-contact-us/) or visit our [help center](https://go.elementor.com/wp-repo-wp-dash-sm-help-center/).
 
 This plugin requires a connection to an active Elementor account to identify the user and provide the purchased service. This connection is triggered manually by the user via the plugin's settings panel. Learn more about our [terms and conditions](https://go.elementor.com/wp-repo-wp-dash-sm-term-and-conditions/).
@@ -87,21 +87,21 @@ This plugin uses a 3rd party service operated by Elementor, which accepts Email 
 
 ## Frequently Asked Questions
 
-### How does the Email Deliverability plugin work?
+### How does the Site Mailer plugin work?
 
-The Email Deliverability plugin connects your site to our secure email service, allowing you to send transactional emails through the cloud instead of your server. This ensures higher deliverability, enhanced security, and better email management.
+The Site Mailer plugin connects your site to our secure email service, allowing you to send transactional emails through the cloud instead of your server. This ensures higher deliverability, enhanced security, and better email management.
 
 ### Does the plugin work with all types of hosting providers?
 
-Yes, the Email Deliverability plugin works with all types of hosting providers, as it connects your site to our secure email service via the cloud, ensuring compatibility regardless of your hosting environment.
+Yes, the Site Mailer plugin works with all types of hosting providers, as it connects your site to our secure email service via the cloud, ensuring compatibility regardless of your hosting environment.
 
-### Can I use the Email Deliverability plugin if I'm not tech-savvy?
+### Can I use the Site Mailer plugin if I'm not tech-savvy?
 
-Absolutely! The Email Deliverability plugin is designed to be user-friendly, with a simple setup process and an intuitive interface, making it easy to use even if you’re not tech-savvy. Just install and activate the plugin, and your emails will automatically be sent through our service.
+Absolutely! The Site Mailer plugin is designed to be user-friendly, with a simple setup process and an intuitive interface, making it easy to use even if you’re not tech-savvy. Just install and activate the plugin, and your emails will automatically be sent through our service.
 
 ### Why do I need a plugin when I have my regular Hypertext Preprocessor (PHP) `mail()` function?
 
-Using the PHP `mail()` function can cause issues with email deliverability and security. The Email Deliverability plugin offers several benefits:
+Using the PHP `mail()` function can cause issues with email deliverability and security. The Site Mailer plugin offers several benefits:
 
 * Higher deliverability: Emails are less likely to be marked as spam.
 * Enhanced security: Uses secure authentication methods.
@@ -110,7 +110,7 @@ Using the PHP `mail()` function can cause issues with email deliverability and s
 
 ### Do you offer support?
 
-Yes, the Elementor team offers full support for Email Deliverability questions. You can contact us via our [Contact Page](https://go.elementor.com/wp-repo-wp-dash-sm-contact-us/)
+Yes, the Elementor team offers full support for Site Mailer questions. You can contact us via our [Contact Page](https://go.elementor.com/wp-repo-wp-dash-sm-contact-us/)
 
 ### How can I report security bugs?
 

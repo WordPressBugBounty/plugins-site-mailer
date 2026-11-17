@@ -70,7 +70,7 @@ class Log_Handler {
 				$time = ( time() + ( 60 * 60 * 0.5 ) ) * $retry;
 
 				// Schedule single event and pass params to it
-				wp_schedule_single_event( $time, self::JOB_PREFIX . $log_id, [ $log_id, ++ $retry ] );
+				wp_schedule_single_event( $time, self::JOB_PREFIX . $log_id, [ $log_id, ++$retry ] );
 			}
 		}
 	}

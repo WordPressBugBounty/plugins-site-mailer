@@ -29,7 +29,7 @@ class Module extends Module_Base {
 		$facade = self::get_connect();
 		$access_token = $facade->data()->get_access_token();
 
-		return ! ! $access_token && $facade->utils()->is_valid_home_url();
+		return (bool) $access_token && $facade->utils()->is_valid_home_url();
 	}
 
 	public static function get_connect(): Facade {
@@ -74,4 +74,3 @@ class Module extends Module_Base {
 		] );
 	}
 }
-

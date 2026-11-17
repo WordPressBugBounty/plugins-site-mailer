@@ -61,7 +61,6 @@ class Module extends Module_Base {
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			]
 		);
-		
 	}
 
 	/**
@@ -217,7 +216,7 @@ class Module extends Module_Base {
 			Logger::error( 'Failed to post feedback:' . $response->get_error_message() );
 			return false;
 		}
-		
+
 		return true;
 	}
 

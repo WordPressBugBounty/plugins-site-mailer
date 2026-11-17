@@ -23,7 +23,7 @@ class Module extends Module_Base {
 		return 'statuses';
 	}
 
-	public static function routes_list() : array {
+	public static function routes_list(): array {
 		return [
 			'Get_Stats',
 			'Get_Statuses',

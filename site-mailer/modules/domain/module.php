@@ -23,7 +23,7 @@ class Module extends Module_Base {
 		return 'domain';
 	}
 
-	public static function routes_list() : array {
+	public static function routes_list(): array {
 		return [
 			'Register',
 			'Verify',

@@ -19,7 +19,7 @@ class Assets {
 	 * @param string $version
 	 * @param bool $footer
 	 */
-	public static function enqueue_scripts( string $handle, string $script_name, array $dependencies = [], string $version = '', bool $footer = false ) : void {
+	public static function enqueue_scripts( string $handle, string $script_name, array $dependencies = [], string $version = '', bool $footer = false ): void {
 		$asset_data = self::get_asset_version_and_suffix( $version );
 		wp_enqueue_script(
 			$handle,
@@ -55,7 +55,7 @@ class Assets {
 	 *
 	 * @return string
 	 */
-	private static function get_assets_version( string $version = '' ) : string {
+	private static function get_assets_version( string $version = '' ): string {
 		return empty( $version ) ? \SITE_MAILER_VERSION : $version;
 	}
 
@@ -63,7 +63,7 @@ class Assets {
 	 * get_assets_suffix
 	 * @return string
 	 */
-	private static function get_assets_suffix() : string {
+	private static function get_assets_suffix(): string {
 		return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 	}
 
@@ -74,7 +74,7 @@ class Assets {
 	 *
 	 * @return array
 	 */
-	private static function get_asset_version_and_suffix( string $version = '' ) : array {
+	private static function get_asset_version_and_suffix( string $version = '' ): array {
 		return [
 			'version' => self::get_assets_version( $version ),
 			'suffix' => self::get_assets_suffix(),
@@ -90,7 +90,7 @@ class Assets {
 	 *
 	 * @return string
 	 */
-	private static function get_assets_path( string $asset_name, string $asset_type, string $suffix = '' ) : string {
+	private static function get_assets_path( string $asset_name, string $asset_type, string $suffix = '' ): string {
 		return \SITE_MAILER_ASSETS_URL . '/build/' . $asset_name . $suffix . '.' . $asset_type;
 		//TODO: Check if we need this
 		//return \SITE_MAILER_ASSETS_URL . $asset_type . '/' . ( '' === $suffix ? 'dev/' : '' ) . $asset_name . $suffix . '.' . $asset_type;
@@ -102,7 +102,7 @@ class Assets {
 	 * @param string $handle
 	 * @param bool $with_css
 	 */
-	public static function enqueue_app_assets( string $handle = '', bool $with_css = true ) : void {
+	public static function enqueue_app_assets( string $handle = '', bool $with_css = true ): void {
 		$dir = \SITE_MAILER_ASSETS_PATH . 'build/';
 		$url = \SITE_MAILER_ASSETS_URL . 'build/';
 

@@ -197,7 +197,6 @@ class Table {
 		}
 
 		return $where_string;
-
 	}
 
 	/**
@@ -236,7 +235,7 @@ class Table {
 		if ( is_array( $value ) ) {
 			$param_string = '(';
 			$count = count( $value );
-			for ( $i = 0; $i < $count; $i ++ ) {
+			for ( $i = 0; $i < $count; $i++ ) {
 				$param_string .= is_int( $value[ $i ] ) ? '%d' : '%s';
 				$param_string .= ( $i !== $count - 1 ) ? ', ' : '';
 			}

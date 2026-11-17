@@ -3,7 +3,7 @@
         'name' => 'elementor/site-mailer',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5393cdaf774d1a390628b7f0dbecd05d4038759c',
+        'reference' => '9c9fa644c54323e36360d2bab67bbe3e53eae799',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'elementor/site-mailer' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5393cdaf774d1a390628b7f0dbecd05d4038759c',
+            'reference' => '9c9fa644c54323e36360d2bab67bbe3e53eae799',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -29,8 +29,8 @@
             'dev_requirement' => false,
         ),
         'elementor/wp-one-package' => array(
-            'pretty_version' => '1.0.66',
-            'version' => '1.0.66.0',
+            'pretty_version' => '1.0.74',
+            'version' => '1.0.74.0',
             'reference' => null,
             'type' => 'library',
             'install_path' => __DIR__ . '/../elementor/wp-one-package',

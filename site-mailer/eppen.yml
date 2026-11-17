@@ -1,0 +1,32 @@
+name: "Site Mailer - SMTP Replacement, Email API Deliverability & Email Log"
+
+ajaxActions:
+  - site_mailer_pointer_dismissed
+
+restRoutes:
+  - site-mailer/v1/connect/authorize
+  - site-mailer/v1/connect/deactivate
+  - site-mailer/v1/connect/deactivate_and_disconnect
+  - site-mailer/v1/connect/disconnect
+  - site-mailer/v1/connect/reconnect
+  - site-mailer/v1/connect/switch_domain
+  - site-mailer/v1/domain/delete
+  - site-mailer/v1/domain/register
+  - site-mailer/v1/domain/verify
+  - site-mailer/v1/logs/delete-logs
+  - site-mailer/v1/logs/get-logs
+  - site-mailer/v1/logs/refresh-statuses
+  - site-mailer/v1/mailer/resend-mails
+  - site-mailer/v1/mailer/send-test-mail
+  - site-mailer/v1/settings/get-settings
+  - site-mailer/v1/statuses/get-stats
+  - site-mailer/v1/statuses/get-statuses
+  - site-mailer/v1/suppressions/add-suppression
+  - site-mailer/v1/suppressions/delete-suppressions
+  - site-mailer/v1/suppressions/get-suppressions
+  # Registered as unsubscribe/(?P<email>[a-zA-Z0-9=_-]+). The probe requests this path.
+  - site-mailer/v1/suppressions/unsubscribe/eppen-probe
+  - site-mailer/v1/webhooks/update-log
+
+adminPages:
+  - site-mailer-settings

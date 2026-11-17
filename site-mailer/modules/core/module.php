@@ -16,7 +16,7 @@ class Module extends Module_Base {
 		return 'core';
 	}
 
-	public static function component_list() : array {
+	public static function component_list(): array {
 		return [
 			'Pointers',
 			'Conflicts',
